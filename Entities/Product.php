@@ -38,23 +38,6 @@ class Product extends Model
     return $this->hasMany(Characteristic::class);
   }
 
-  public function getSecondaryImageAttribute()
-  {
-    $thumbnail = $this->files()->where('zone', 'secondaryimage')->first();
-    if (!$thumbnail) {
-      $image = [
-        'mimeType' => 'image/jpeg',
-        'path' => url('modules/iblog/img/post/default.jpg')
-      ];
-    } else {
-      $image = [
-        'mimeType' => $thumbnail->mimetype,
-        'path' => $thumbnail->path_string
-      ];
-    }
-    return json_decode(json_encode($image));
-  }
-
   public function getMainImageAttribute()
   {
     $thumbnail = $this->files()->where('zone', 'mainimage')->first();
