@@ -25,7 +25,7 @@ class TypeApiController extends BaseApiController
   public function index()
   {
     try {
-      $types = $this->type->lists();
+      $types = $this->type->all();
       $response=[
         'data' => $types
       ];
