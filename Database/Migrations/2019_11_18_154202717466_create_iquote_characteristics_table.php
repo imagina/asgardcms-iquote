@@ -23,6 +23,9 @@ class CreateIquoteCharacteristicsTable extends Migration
             $table->boolean('active');
             $table->integer('position')->unsigned()->default(0);
             $table->boolean('required')->default(true);
+            $table->integer('max')->nullable();
+            $table->integer('min')->nullable();
+            $table->boolean('with_notes')->default(false)->nullable();
             $table->timestamps();
         });
     }
