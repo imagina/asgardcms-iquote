@@ -36,6 +36,32 @@ class Type
     return  $this->types;
   }
 
+  public function all()
+  {
+    return [
+      [
+        'value' => self::SELECT,
+        'label' => trans('iquote::common.status.select')
+      ],
+      [
+        'value' => self::CHECKBOX,
+        'label' => trans('iquote::common.status.checkbox'),
+      ],
+      [
+        'value' => self::VALUE,
+        'label' => trans('iquote::common.status.value'),
+      ],
+      [
+        'value' => self::NUMBER,
+        'label' => trans('iquote::common.status.number'),
+      ],
+      [
+        'value' => self::OPTION,
+        'label' => trans('iquote::common.status.option'),
+      ],
+    ];
+  }
+
   /**
    * Get the post status
    * @param int $statusId
