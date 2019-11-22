@@ -104,8 +104,9 @@ class EloquentPackageRepository extends EloquentBaseRepository implements Packag
 
   public function create($data)
   {
-    $category = $this->model->create($data);
-    return $category;
+    $package = $this->model->create($data);
+    $package->products()->sync(array_get($data, 'products', []));
+    return $package;
   }
 
   public function updateBy($criteria, $data, $params = false)
@@ -121,6 +122,8 @@ class EloquentPackageRepository extends EloquentBaseRepository implements Packag
     }
     /*== REQUEST ==*/
     $model = $query->where($field ?? 'id', $criteria)->first();
+    $package = $model ? $model->update((array)$data) : false;
+    $model->products()->sync(array_get($data, 'products', []));
     return $model ? $model->update((array)$data) : false;
   }
 
