@@ -16,9 +16,9 @@ class CreateIquotePackageProductTable extends Migration
         Schema::create('iquote__package_product', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('iquote__products')->onDelete('restrict');
+            $table->foreign('product_id')->references('id')->on('iquote__products')->onDelete('cascade');
             $table->integer('package_id')->unsigned();
-            $table->foreign('package_id')->references('id')->on('iquote__packages')->onDelete('restrict');
+            $table->foreign('package_id')->references('id')->on('iquote__packages')->onDelete('cascade');
             $table->timestamps();
         });
     }
