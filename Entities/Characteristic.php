@@ -29,6 +29,9 @@ class Characteristic extends Model
     'active',
     'position',
     'required',
+    'max',
+    'min',
+    'with_notes',
   ];
 
   protected $presenter = CharacteristicPresenter::class;
