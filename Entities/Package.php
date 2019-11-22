@@ -17,7 +17,7 @@ class Package extends Model
     'package_id',
   ];
 
-  protected $fillable = [];
+  protected $fillable = ['name','description', 'package_id'];
 
   public function products()
   {
