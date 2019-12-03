@@ -57,6 +57,17 @@ class EloquentProductRepository extends EloquentBaseRepository implements Produc
         $orderWay = $filter->order->way ?? 'desc';//Default way
         $query->orderBy($orderByField, $orderWay);//Add order to query
       }
+
+      // Filter by id
+      if (isset($filter->id)) {
+        $query->where("id", $filter->id);
+      }
+
+      // Filter by ids
+      if (isset($filter->ids)) {
+        $query->whereIn("id", $filter->ids);
+      }
+
       //Filter by active
       if (isset($filter->active)) {
         $query->where("active", $filter->active);
