@@ -24,6 +24,7 @@ class CharacteristicTransformer extends Resource
       'options' => $this->when( $this->options, $this->options ),
       'max' => $this->max ? $this->max : 0,
       'min' => $this->min ? $this->min : 0,
+      'model' => '',
       'withNotes' =>  $this->with_notes ? true : false,
       'mainImage' => $this->main_image,
       'product' => new ProductTransformer ($this->whenLoaded('product')),
