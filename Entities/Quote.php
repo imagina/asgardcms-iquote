@@ -20,6 +20,10 @@ class Quote extends Model
     'customer_id',
   ];
 
+  protected $casts = [
+    'value' => 'array',
+  ];
+
   public function user()
   {
     $driver = config('asgard.user.config.driver');
