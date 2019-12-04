@@ -19,11 +19,11 @@ class CreateIquoteQuotesTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('phone');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->text('value');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on(config('auth.table', 'users'))->onDelete('restrict');
-            $table->integer('customer_id')->unsigned();
+            $table->integer('customer_id')->unsigned()->nullable();;
             $table->foreign('customer_id')->references('id')->on(config('auth.table', 'users'))->onDelete('restrict');
             $table->timestamps();
         });
