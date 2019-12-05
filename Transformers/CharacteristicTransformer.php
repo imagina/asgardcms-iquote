@@ -22,10 +22,12 @@ class CharacteristicTransformer extends Resource
       'required' => $this->required ? true : false,
       'createdAt' => $this->when($this->created_at, $this->created_at),
       'options' => $this->when( $this->options, $this->options ),
-      'max' => $this->max ? $this->max : 0,
-      'min' => $this->min ? $this->min : 0,
-      'model' => '',
+      'max' => $this->max ? intval($this->max) : 0,
+      'min' => $this->min ? intval($this->min) : 0,
+      'model' => $this->getModel($this->type),
+      'checked' => true,
       'withNotes' =>  $this->with_notes ? true : false,
+      'notes' =>  '',
       'mainImage' => $this->main_image,
       'product' => new ProductTransformer ($this->whenLoaded('product')),
       'parent' => new CharacteristicTransformer ($this->whenLoaded('parent')),
@@ -45,5 +47,15 @@ class CharacteristicTransformer extends Resource
     }
 
     return $data;
+  }
+
+  private function getModel ($type) {
+    if ($type == 2) {
+      return false;
+    }
+    if ($type == 4 || $type == 3) {
+      return 0;
+    }
+    return '';
   }
 }
