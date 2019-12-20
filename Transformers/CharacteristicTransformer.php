@@ -28,6 +28,7 @@ class CharacteristicTransformer extends Resource
       'checked' => true,
       'withNotes' =>  $this->with_notes ? true : false,
       'notes' =>  '',
+      'childrengenerated' =>  $this->when($this->type == 4, ''),
       'mainImage' => $this->main_image,
       'product' => new ProductTransformer ($this->whenLoaded('product')),
       'parent' => new CharacteristicTransformer ($this->whenLoaded('parent')),
