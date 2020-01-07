@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PackageProduct extends Model
 {
   protected $table = 'iquote__package_product';
-
+  
   protected $fillable = [
     'product_id',
     'package_id',

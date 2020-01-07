@@ -19,6 +19,7 @@ class QuoteTransformer extends Resource
       'phone' => $this->when($this->phone, $this->phone),
       'notes' => $this->when($this->notes, $this->notes),
       'value' => $this->when($this->value, $this->value),
+      'tree' => $this->when($this->value,$this->present()->tree()),
       'userId' => $this->when($this->user_id, $this->user_id),
       'customerId' => $this->when($this->customer_id, $this->customer_id),
       'user' => new UserProfileTransformer($this->whenLoaded('user')),

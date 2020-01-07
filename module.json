@@ -8,11 +8,12 @@
     "order": 1,
     "providers": [
         "Modules\\Iquote\\Providers\\IquoteServiceProvider",
+        "Modules\\Iquote\\Providers\\EventServiceProvider",
         "Modules\\Iquote\\Providers\\RouteServiceProvider"
     ],
     "aliases": {},
     "files": [
-        
+
     ],
     "requires": []
 }

@@ -25,7 +25,7 @@ class PackageProductApiController extends BaseApiController
   {
     $this->packageProduct = $packageProduct;
   }
-
+  
   /**
    * GET ITEMS
    *

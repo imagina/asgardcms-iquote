@@ -37,7 +37,7 @@ class Product extends Model
   {
     return $this->hasMany(Characteristic::class);
   }
-
+  
   public function getMainImageAttribute()
   {
     $thumbnail = $this->files()->where('zone', 'mainimage')->first();

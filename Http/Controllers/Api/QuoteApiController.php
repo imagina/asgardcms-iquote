@@ -3,6 +3,8 @@
 namespace Modules\Iquote\Http\Controllers\Api;
 
 // Requests & Response
+use Modules\Iquote\Events\QuoteIsDownloading;
+use Modules\Iquote\Events\QuoteIsSending;
 use Modules\Iquote\Http\Requests\CreateQuoteRequest;
 use Modules\Iquote\Http\Requests\UpdateQuoteRequest;
 use Illuminate\Http\Request;
@@ -152,4 +154,67 @@ class QuoteApiController extends BaseApiController
     }
     return response()->json($response, $status ?? 200);
   }
+
+  /**
+   * Send the specified quote to mail.
+   * @param $criteria
+   * @param  Request $request
+   * @return Response
+   */
+  public function sendQuote($criteria, Request $request)
+  {
+    \DB::beginTransaction();
+    try {
+      $params = $this->getParamsRequest($request);
+      $data = $request->input('attributes');
+      //Validate Request
+      //$this->validateRequestApi(new UpdateQuoteRequest($data));
+      //Update data
+      $model = $this->quote->getItem($criteria, $params);
+      $quote = new QuoteTransformer($model);
+
+      event(new QuoteIsSending(json_decode(json_encode($quote))));
+
+      //Response
+      $response = ['data' => $quote];
+      \DB::commit(); //Commit to Data Base
+    } catch (\Exception $e) {
+      \DB::rollback();//Rollback to Data Base
+      $status = $this->getStatusError($e->getCode());
+      $response = ["errors" => $e->getMessage().' '.$e->getFile().' '.$e->getLine()];
+    }
+    return response()->json($response, $status ?? 200);
+  }
+
+  /**
+   * download the specified quote to pdf.
+   * @param $criteria
+   * @param  Request $request
+   * @return Response
+   */
+  public function downloadQuote($criteria, Request $request)
+  {
+    \DB::beginTransaction();
+    try {
+      $params = $this->getParamsRequest($request);
+      $data = $request->input('attributes');
+      //Validate Request
+      //$this->validateRequestApi(new UpdateQuoteRequest($data));
+      //Update data
+      $model = $this->quote->getItem($criteria, $params);
+      $quote = new QuoteTransformer($model);
+
+      event(new QuoteIsDownloading(json_decode(json_encode($quote))));
+
+      //Response
+      $response = ['data' => $quote];
+      \DB::commit(); //Commit to Data Base
+    } catch (\Exception $e) {
+      \DB::rollback();//Rollback to Data Base
+      $status = $this->getStatusError($e->getCode());
+      $response = ["errors" => $e->getMessage().' '.$e->getFile().' '.$e->getLine()];
+    }
+    return response()->json($response, $status ?? 200);
+  }
+
 }

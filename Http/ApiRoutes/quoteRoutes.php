@@ -26,4 +26,9 @@ $router->group(['prefix' => 'quotes'], function (Router $router) {
     'uses' => 'QuoteApiController@delete',
     'middleware' => ['auth:api']
   ]);
+  $router->put('/send/{criteria}', [
+    'as' => 'api.iquote.quotes.send',
+    'uses' => 'QuoteApiController@sendQuote',
+    'middleware' => ['auth:api']
+  ]);
 });
