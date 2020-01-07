@@ -24,7 +24,6 @@ class CreateIquoteQuotesTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on(config('auth.table', 'users'))->onDelete('restrict');
             $table->integer('customer_id')->unsigned()->nullable();;
-            $table->foreign('customer_id')->references('id')->on(config('auth.table', 'users'))->onDelete('restrict');
             $table->timestamps();
         });
     }

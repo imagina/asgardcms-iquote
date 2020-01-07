@@ -66,7 +66,7 @@ class QuoteApiController extends BaseApiController
       //Request to Repository
       $quote = $this->quote->getItem($criteria, $params);
       //Break if no found item
-      if (!$quote) throw new Exception('Item not found', 204);
+      if (!$quote) throw new \Exception('Item not found', 204);
       //Response
       $response = ["data" => new QuoteTransformer($quote)];
       //If request pagination add meta-page
@@ -203,11 +203,10 @@ class QuoteApiController extends BaseApiController
       //Update data
       $model = $this->quote->getItem($criteria, $params);
       $quote = new QuoteTransformer($model);
-
       event(new QuoteIsDownloading(json_decode(json_encode($quote))));
-
+      $pdfRoute = "modules/iquote/pdf/quote".str_pad($quote->id,5,"0",STR_PAD_LEFT).".pdf";
       //Response
-      $response = ['data' => $quote];
+      $response = ['data' => ['pdfUrl'=> url($pdfRoute)]];
       \DB::commit(); //Commit to Data Base
     } catch (\Exception $e) {
       \DB::rollback();//Rollback to Data Base

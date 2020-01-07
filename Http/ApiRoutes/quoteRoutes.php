@@ -31,4 +31,9 @@ $router->group(['prefix' => 'quotes'], function (Router $router) {
     'uses' => 'QuoteApiController@sendQuote',
     'middleware' => ['auth:api']
   ]);
+  $router->put('/download/{criteria}', [
+    'as' => 'api.iquote.quotes.download',
+    'uses' => 'QuoteApiController@downloadQuote',
+    'middleware' => ['auth:api']
+  ]);
 });

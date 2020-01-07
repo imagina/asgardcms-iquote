@@ -1,14 +1,11 @@
+
 <?php
-
-
 namespace Modules\Iquote\Transformers;
-
 use Illuminate\Http\Resources\Json\Resource;
 use Modules\User\Transformers\UserProfileTransformer;
-
+use Modules\Iprofile\Transformers\UserTransformer;
 class QuoteTransformer extends Resource
 {
-
   public function toArray($request)
   {
     $data = [
@@ -19,13 +16,13 @@ class QuoteTransformer extends Resource
       'phone' => $this->when($this->phone, $this->phone),
       'notes' => $this->when($this->notes, $this->notes),
       'value' => $this->when($this->value, $this->value),
-      'tree' => $this->when($this->value,$this->present()->tree()),
+      'treePdf' => $this->when($this->value,$this->present()->treePdf()),
+      'total' => $this->when($this->value,$this->present()->total()),
       'userId' => $this->when($this->user_id, $this->user_id),
       'customerId' => $this->when($this->customer_id, $this->customer_id),
-      'user' => new UserProfileTransformer($this->whenLoaded('user')),
-      'customer' => new UserProfileTransformer($this->whenLoaded('customer')),
+      'user' => new UserTransformer($this->whenLoaded('user')),
+      'customer' => new UserTransformer($this->whenLoaded('customer')),
     ];
     return $data;
   }
-
 }
