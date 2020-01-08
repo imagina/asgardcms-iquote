@@ -1,5 +1,5 @@
-
 <?php
+
 namespace Modules\Iquote\Transformers;
 use Illuminate\Http\Resources\Json\Resource;
 use Modules\User\Transformers\UserProfileTransformer;
