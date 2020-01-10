@@ -20,12 +20,16 @@ class Quote extends Model
     'value',
     'user_id',
     'customer_id',
+    'options',
   ];
 
   protected $presenter = QuotePresenter::class;
 
+  protected $fakeColumns = ['options'];
+
   protected $casts = [
     'value' => 'array',
+    'options' => 'array',
   ];
 
   public function user()

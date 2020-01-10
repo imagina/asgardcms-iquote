@@ -18,6 +18,7 @@ class QuoteTransformer extends Resource
       'value' => $this->when($this->value, $this->value),
       'treePdf' => $this->when($this->value,$this->present()->treePdf()),
       'total' => $this->when($this->value,$this->present()->total()),
+      'options' => $this->when($this->options,$this->options),
       'userId' => $this->when($this->user_id, $this->user_id),
       'customerId' => $this->when($this->customer_id, $this->customer_id),
       'user' => new UserTransformer($this->whenLoaded('user')),
