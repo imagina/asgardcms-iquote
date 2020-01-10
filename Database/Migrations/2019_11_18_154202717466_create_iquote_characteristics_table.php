@@ -16,7 +16,7 @@ class CreateIquoteCharacteristicsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('iquote__products')->onDelete('restrict');
+            $table->foreign('product_id')->references('id')->on('iquote__products')->onDelete('cascade');
             $table->integer('type')->default(0)->unsigned();
             $table->integer('parent_id')->default(0);
             $table->float('price');
