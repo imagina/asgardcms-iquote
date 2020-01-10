@@ -38,11 +38,11 @@ class QuotePresenter extends Presenter
                       ".($child->name ?? $child->title)."                                  
                     </td>
                     <td width='20%'>
-                      " . number_format($child->price) . " COP
+                      " . number_format($child->price) . " ".setting('iquote::currency-symbol')."
                     </td>
                     <td width='15%' align='center'>".($child->model ?? $child->quantity ?? '1')."</td>
                     <td width='20%' align='right'>
-                      " . number_format($selected->model->price) . " COP
+                      " . number_format($selected->model->price) . " ".setting('iquote::currency-symbol')."
                     </td>                  
                   </tr>
                   <tr>
@@ -53,7 +53,7 @@ class QuotePresenter extends Presenter
                           ".(isset($child->characteristics) || isset($child->childrengenerated) || isset($child->children)?"
                             <tr class='t1 text-bold'>
                               <td class='text-primary table-bg' width='45%'>Total ".($child->name ?? $child->title)."</td>
-                              <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." COP</td>
+                              <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." ".setting('iquote::currency-symbol')."</td>
                             </tr>
                           ":"")."
                         </tbody>
@@ -70,11 +70,11 @@ class QuotePresenter extends Presenter
                       ".($child->name ?? $child->title)."                                  
                     </td>
                     <td width='20%'>
-                      " . number_format($child->price ?? $child->model) . " COP
+                      " . number_format($child->price ?? $child->model) . " ".setting('iquote::currency-symbol')."
                     </td>
                     <td width='15%' align='center'>".($child->model ?? $child->quantity ?? '1')."</td>
                     <td width='20%' align='right'>
-                      " . number_format($child->price * ($child->model ?? $child->quantity ?? 1)) . " COP
+                      " . number_format($child->price * ($child->model ?? $child->quantity ?? 1)) . " ".setting('iquote::currency-symbol')."
                     </td>                  
                   </tr>                  
                   <tr>
@@ -85,7 +85,7 @@ class QuotePresenter extends Presenter
                           ".(isset($child->characteristics) || isset($child->childrengenerated) || isset($child->children)?"
                             <tr class='t1 text-bold'>
                               <td class='text-primary table-bg' width='45%'>Total ".($child->name ?? $child->title)."</td>
-                              <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." COP</td>
+                              <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." ".setting('iquote::currency-symbol')."</td>
                             </tr>
                           ":"")."
                         </tbody>
@@ -101,11 +101,11 @@ class QuotePresenter extends Presenter
                     ".($child->name ?? $child->title)."                                  
                   </td>
                   <td width='20%'>
-                    " . number_format($child->model) . " COP
+                    " . number_format($child->model) . " ".setting('iquote::currency-symbol')."
                   </td>
                   <td width='15%' align='center'>1</td>
                   <td width='20%' align='right'>
-                    " . number_format($child->model) . " COP
+                    " . number_format($child->model) . " ".setting('iquote::currency-symbol')."
                   </td>                  
                 </tr>
                 <tr>
@@ -116,7 +116,7 @@ class QuotePresenter extends Presenter
                         ".(isset($child->characteristics) || isset($child->childrengenerated) || isset($child->children)?"
                         <tr class='t1 text-bold'>
                           <td class='text-primary table-bg' width='45%'>Total ".($child->name ?? $child->title)."</td>
-                          <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." COP</td>
+                          <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." ".setting('iquote::currency-symbol')."</td>
                         </tr>
                         ":"")."
                       </tbody>
@@ -138,7 +138,7 @@ class QuotePresenter extends Presenter
                         ".(isset($child->characteristics) || isset($child->childrengenerated) || isset($child->children)?"
                         <tr class='t1 text-bold'>
                           <td class='text-primary table-bg' width='45%'>Total ".($child->name ?? $child->title)."</td>
-                          <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." COP</td>
+                          <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." ".setting('iquote::currency-symbol')."</td>
                         </tr>
                         ":"")."
                       </tbody>                      
@@ -157,8 +157,8 @@ class QuotePresenter extends Presenter
                   </tr>
                   <tr class='t1'>           
                     <td width='45%' class='table-bg'>&nbsp;</td>               
-                    <td width='20%'>Valor Unidad</td>
-                    <td width='15%' align='center'>Cantidad</td>
+                    <td width='20%'>".trans('iquote::quotes.pdf.unit_value')."</td>
+                    <td width='15%' align='center'>".trans('iquote::quotes.pdf.quantity')."</td>
                     <td width='20%' align='right'>Total</td>
                   </tr>            
                 </thead>
@@ -167,7 +167,7 @@ class QuotePresenter extends Presenter
                   ".(isset($child->characteristics) || isset($child->childrengenerated) || isset($child->children)?"
                     <tr class='t1 text-bold'>
                       <td class='text-primary table-bg' width='45%'>Total ".($child->name ?? $child->title)."</td>
-                      <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." COP</td>
+                      <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." ".setting('iquote::currency-symbol')."</td>
                     </tr>
                     ":"")."
                 </tbody>

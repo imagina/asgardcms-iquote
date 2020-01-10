@@ -17,6 +17,21 @@ return [
     ],
     'form' => [
     ],
+    'pdf' => [
+      'first_name' => 'First Name',
+      'last_name' => 'Last Name',
+      'document_id' => 'ID or Tax Number',
+      'birthday' => 'Birthday',
+      'country' => 'Country',
+      'state' => 'State or Department',
+      'city' => 'City',
+      'address' => 'Address',
+      'email' => 'Email',
+      'phone' => 'Phone or Cell',
+      'notes' => 'Additional Notes',
+      'unit_value' => 'Unit Value',
+      'quantity' => 'Quantity',
+    ],
     'messages' => [
     ],
     'validation' => [

@@ -3,12 +3,28 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <title>{{ setting('core::site-name') }} - Cotización #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</title>
+    <title>{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/solid.min.css" type="text/css" />
     <style type="text/css">
+
+        @font-face {
+            font-family: "FontAwesomeRegular";
+            font-weight: normal;
+            font-style : normal;
+            src : url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/webfonts/fa-regular-400.ttf") format("truetype");
+        }
+        @font-face {
+            font-family: "FontAwesomeBrands";
+            font-weight: normal;
+            font-style : normal;
+            src : url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/webfonts/fa-brands-400.ttf") format("truetype");
+        }
+        @font-face {
+            font-family: "FontAwesomeSolid";
+            font-weight: bold;
+            font-style : normal;
+            src : url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/webfonts/fa-solid-900.ttf") format("truetype");
+        }
 
         .fas,.fab,.far{
             padding-right: 5px;
@@ -93,12 +109,13 @@
         }
 
         @page {
-            margin: 60px 25px;
+            margin: 80px 25px 40px;
+            size: 215.9mm 279.4mm portrait;
         }
 
         header {
             position: fixed;
-            top: -70px;
+            top: -90px;
             left: 0px;
             right: 0px;
             height: 50px;
@@ -110,7 +127,7 @@
 
        .footer {
             position: fixed;
-            bottom: -60px;
+            bottom: -40px;
             left: 0px;
             right: 0px;
             height: 50px;
@@ -140,15 +157,15 @@
             font-weight: bold;
         }
 
-        tr.t1 td{
+        tr.t1 td {
             border-top: 1px solid #888;
             border-bottom: 1px solid #888;
-            border-right: 1px solid #888;
+            border-left: 1px solid #888;
             padding: 10px 5px;
         }
 
-        tr.t1 td:last-child{
-            border-right: none;
+        tr.t1 td:last-child {
+            border-right: 1px solid #888;
         }
 
         .table-bg{
@@ -170,12 +187,18 @@
 
             /** Change image dimensions**/
             width:    60mm;
-            height:   35mm;
+            height:   15mm;
 
             /** Your watermark should be behind every content**/
             opacity: 0.6;
             z-index: 1000;
             padding-left: 15px;
+        }
+        #watermark img{
+            width: auto!important;
+            height: 100%!important;
+            margin: 0 auto!important;
+            text-align: center;
         }
 
     </style>
@@ -184,10 +207,10 @@
 <body>
     <header>
         <div style="width:100%;cursor:auto;color:#000000;font-family:Ubuntu, sans-serif;line-height:1.5;text-align:right;">
-            <p><strong><span style="font-size:10px;">{{ setting('core::site-name') }} - Cotización #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span></strong></p>
         </div>
+        <p><strong><span style="font-size:10px;">{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span></strong></p>
         <div id="watermark">
-            <img src="{{ setting('isite::logo1') }}" height="auto" width="100%" />
+            <img src="{{ setting('isite::logo1') }}" />
         </div>
         <div style="width:100%;text-align: center" class="footer">
             <div>
@@ -196,61 +219,64 @@
         </div>
     </header>
     <main>
-        <div class="page-break" style="width:100%;font-size:14px;text-align:left;padding: 15px">
-            <div class="mj-column-per-100"><h1 class="text-primary" style="text-align: center">Resumen de la Cotización</h1></div>
-            <div class="mj-column-per-100 head-title">Perfil del Cliente</div>
+        <div class="page-break" style="width:100%;font-size:14px;text-align:left;padding: 0 15px 15px">
+            <div class="mj-column-per-100">
+                {!! setting('iquote::pdf-header-text') !!}
+            </div>
+            <div class="mj-column-per-100"><h1 class="text-primary" style="text-align: center">{{ trans('iquote::iquotes.title.resume') }}</h1></div>
+            <div class="mj-column-per-100 head-title">{{ trans('iquote::iquotes.title.customer_profile') }}</div>
             <div style="border: 1px solid #888; padding: 10px">
                 <div class="mj-column-per-33">
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-user"></i>Nombres: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-user"></i>{{ trans('iquote::quotes.pdf.first_name') }}</strong></div>
                         <div>{{ $quote->firstName }}</div>
                     </p>
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-id-card-alt"></i>Cédula o Nit: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-id-card-alt"></i>{{ trans('iquote::quotes.pdf.document_id') }}</strong></div>
                         <div>{{ $quote->phone ?? '--' }}</div>
                     </p>
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-globe-americas"></i>País: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-globe-americas"></i>{{ trans('iquote::quotes.pdf.country') }}</strong></div>
                         <div>{{ $quote->customer->addresses[0]->country ?? '--' }}</div>
                     </p>
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-thumbtack"></i>Ciudad: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-thumbtack"></i>{{ trans('iquote::quotes.pdf.city') }}</strong></div>
                         <div>{{ $quote->customer->addresses[0]->city ?? '--' }}</div>
                     </p>
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-envelope"></i>Correo: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-envelope"></i>{{ trans('iquote::quotes.pdf.email') }}</strong></div>
                         <div>{{ $quote->email ?? '--' }}</div>
                     </p>
                 </div>
                 <div class="mj-column-per-33">
                     <p>
-                        <div class="text-primary"><strong><i class="far fa-user"></i>Apellidos: </strong></div>
+                        <div class="text-primary"><strong><i class="far fa-user"></i>{{ trans('iquote::quotes.pdf.last_name') }}</strong></div>
                         <div>{{ $quote->lastName }}</div>
                     </p>
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-calendar-day"></i>Fecha de Nacimiento: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-calendar-day"></i>{{ trans('iquote::quotes.pdf.birthday') }}</strong></div>
                         <div>{{ $quote->phone ?? '--' }}</div>
                     </p>
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-map-marker-alt"></i>Departamento o Estado: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-map-marker-alt"></i>{{ trans('iquote::quotes.pdf.state') }}</strong></div>
                         <div>{{ $quote->customer->addresses[0]->state ?? '--' }}</div>
                     </p>
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-arrow-circle-right"></i>Dirección: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-arrow-circle-right"></i>{{ trans('iquote::quotes.pdf.address') }}</strong></div>
                         <div>{{ $quote->customer->addresses[0]->address1 ?? '--' }}</div>
                     </p>
                     <p>
-                        <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>Celular o Teléfono: </strong></div>
+                        <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>{{ trans('iquote::quotes.pdf.phone') }}</strong></div>
                         <div>{{ $quote->phone ?? '--' }}</div>
                     </p>
                 </div>
                 <div class="mj-column-per-33">
-                    <div class="text-primary"><strong><i class="fas fa-comment-dots"></i>Notas Adicionales: </strong></div>
+                    <div class="text-primary"><strong><i class="fas fa-comment-dots"></i>{{ trans('iquote::quotes.pdf.notes') }}</strong></div>
                     <div>{!! $quote->notes ?? '--' !!}</div>
                 </div>
             </div>
             <div>&nbsp;</div>
-            <div class="mj-column-per-100 head-title">Perfil de la Cotización</div>
+            <div class="mj-column-per-100 head-title">{{ trans('iquote::iquotes.title.quote_profile') }}</div>
         </div>
         <div style="padding: 0 20px;min-height: 400px;width: 100%;font-size: 14px">
             {!! $quote->treePdf !!}
@@ -258,11 +284,15 @@
             <table width="100%" valign="top">
                 <tfoot>
                     <tr class="t1">
-                        <td class="head-title" width="45%">Gran Total</td>
-                        <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->total) }} COP</b></td>
+                        <td class="head-title" width="45%">{{ trans('iquote::iquotes.title.total') }}</td>
+                        <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->total) }} {{ setting('iquote::currency-symbol') }}</b></td>
                     </tr>
                 </tfoot>
             </table>
+            <p>&nbsp;</p>
+            <div class="mj-column-per-100">
+                {!! setting('iquote::pdf-footer-text') !!}
+            </div>
         </div>
     </main>
 </body>

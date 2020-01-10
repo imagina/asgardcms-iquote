@@ -232,7 +232,7 @@
             <tfoot>
             <tr class="t1">
                 <td class="head-title" width="45%">Gran Total</td>
-                <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->total) }} COP</b></td>
+                <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->total) }} {{ setting('iquote::currency-symbol') }}</b></td>
             </tr>
             </tfoot>
         </table>
