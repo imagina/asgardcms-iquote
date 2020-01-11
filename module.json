@@ -9,7 +9,8 @@
     "providers": [
         "Modules\\Iquote\\Providers\\IquoteServiceProvider",
         "Modules\\Iquote\\Providers\\EventServiceProvider",
-        "Modules\\Iquote\\Providers\\RouteServiceProvider"
+        "Modules\\Iquote\\Providers\\RouteServiceProvider",
+        "Modules\\Iquote\\Providers\\CurrencyServiceProvider"
     ],
     "aliases": {},
     "files": [
