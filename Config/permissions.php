@@ -31,7 +31,14 @@ return [
         'edit' => 'iquote::quotes.edit resource',
         'destroy' => 'iquote::quotes.destroy resource',
     ],
+    'iquote.currencies' => [
+        'index' => 'iquote::currencies.list resource',
+        'create' => 'iquote::currencies.create resource',
+        'edit' => 'iquote::currencies.edit resource',
+        'destroy' => 'iquote::currencies.destroy resource',
+    ],
 // append
+
 
 
 
