@@ -4,21 +4,6 @@
 
 `composer require imagina/iquote`
 
-`php artisan module:migrate Iquote`
-
-`php artisan db:seed --class=\\Modules\\Iquote\\Database\\Seeders\\CurrencyTableSeederTableSeeder`
-
-Finally, add two class aliases to the aliases array of config/app.php:
-
-Add follow facade to 
-```php
-'aliases' => [
-    // ...
-      'currency' => Modules\Iquote\Facades\CurrencyFacade::class,
-    // ...
-  ],
-```
-
 ## End Points
 Route Base: `https://yourhost/api/iquote/v1/`
 
