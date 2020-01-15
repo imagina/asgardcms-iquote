@@ -28,6 +28,7 @@ return [
       'address' => 'Dirección',
       'email' => 'Correo',
       'phone' => 'Celular o Teléfono',
+      'phone_mini' => 'Teléfono',
       'notes' => 'Notas Adicionales',
       'unit_value' => 'Valor Unidad',
       'quantity' => 'Cantidad',
