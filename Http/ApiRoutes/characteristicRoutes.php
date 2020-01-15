@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Routing\Router;
+use Modules\Iquote\Facades\Currency;
 
 $router->group(['prefix' => 'characteristics'], function (Router $router) {
+
   $router->post('/', [
     'as' => 'api.iquote.characteristics.create',
     'uses' => 'CharacteristicApiController@create',

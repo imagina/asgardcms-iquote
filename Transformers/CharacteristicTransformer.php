@@ -3,6 +3,8 @@
 namespace Modules\Iquote\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
+use Modules\Icurrency\Facades\Currency;
+
 
 class CharacteristicTransformer extends Resource
 {
@@ -14,7 +16,7 @@ class CharacteristicTransformer extends Resource
       'type' => $this->when( $this->type, intval($this->type)),
       'typeName' => $this->when($this->type, $this->present()->type),
       'parentId' => $this->parent_id ? $this->parent_id : null,
-      'price' => $this->price,
+      'price' => Currency::convert($this->price),
       'active' => $this->active ? true : false,
       'name' => $this->when( $this->name, $this->name ),
       'description' => $this->when( $this->description, $this->description ),
@@ -44,6 +46,13 @@ class CharacteristicTransformer extends Resource
         $data[$lang]['name'] = $this->hasTranslation($lang) ? $this->translate("$lang")['name'] : '';
         $data[$lang]['description'] = $this->hasTranslation($lang) ? $this->translate("$lang")['description'] ?? '' : '';
         $data[$lang]['options'] = $this->hasTranslation($lang) ? $this->translate("$lang")['options'] : '';
+      }
+    }
+
+    if (isset($filter->allCurrencies) && $filter->allCurrencies) {
+      $currencies = Currency::getSupportedCurrencies();
+      foreach ($currencies as $item => $val) {
+        $data[$val->code]['price'] = Currency::convertFromTo($this->price, $val->code);
       }
     }
 

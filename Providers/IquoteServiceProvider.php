@@ -34,7 +34,9 @@ class IquoteServiceProvider extends ServiceProvider
             $event->load('characteristics', array_dot(trans('iquote::characteristics')));
             $event->load('types', array_dot(trans('iquote::types')));
             $event->load('quotes', array_dot(trans('iquote::quotes')));
+            $event->load('currencies', array_dot(trans('iquote::currencies')));
             // append translations
+
 
 
 
@@ -46,6 +48,7 @@ class IquoteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishConfig('iquote', 'permissions');
+        $this->publishConfig('iquote', 'settings');
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
@@ -135,6 +138,7 @@ class IquoteServiceProvider extends ServiceProvider
           }
       );
 // add bindings
+
 
 
 
