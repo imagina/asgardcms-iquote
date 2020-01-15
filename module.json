@@ -11,7 +11,9 @@
         "Modules\\Iquote\\Providers\\EventServiceProvider",
         "Modules\\Iquote\\Providers\\RouteServiceProvider"
     ],
-    "aliases": {},
+    "aliases": {
+        "Currency": "Modules\\Icurrency\\Support\\Facades\\Currency"
+    },
     "files": [
 
     ],
