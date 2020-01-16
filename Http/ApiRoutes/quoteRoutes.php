@@ -6,7 +6,7 @@ $router->group(['prefix' => 'quotes'], function (Router $router) {
   $router->post('/', [
     'as' => 'api.iquote.quotes.create',
     'uses' => 'QuoteApiController@create',
-    'middleware' => ['auth:api']
+    //'middleware' => ['auth:api']
   ]);
   $router->get('/', [
     'as' => 'api.iquote.quotes.index',
