@@ -16,7 +16,7 @@ class CreateIquoteCharacteristicTranslationsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->text('options')->nullable();
             $table->integer('characteristic_id')->unsigned();
             $table->string('locale')->index();
