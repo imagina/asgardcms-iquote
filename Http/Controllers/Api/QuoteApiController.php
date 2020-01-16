@@ -94,8 +94,27 @@ class QuoteApiController extends BaseApiController
       $this->validateRequestApi(new CreateQuoteRequest($data));
       //Create item
       $quote = $this->quote->create($data);
+
+      $dataQuote = new QuoteTransformer($quote);
+
       //Response
-      $response = ["data" => new QuoteTransformer($quote)];
+      $response = [
+        "data" => $dataQuote,
+        "sending" => null,
+        "isDownloading" => null,
+      ];
+
+      if (isset($data['is_sending']) && $data['is_sending']){
+        event(new QuoteIsSending(json_decode(json_encode($dataQuote))));
+        $response["isSending"] = true;
+      }
+
+      if (isset($data['is_downloading']) && $data['is_downloading']){
+        event(new QuoteIsDownloading(json_decode(json_encode($dataQuote))));
+        $pdfRoute = "modules/iquote/pdf/quote".str_pad($quote->id,5,"0",STR_PAD_LEFT).".pdf";
+        $response["isDownloading"] = url($pdfRoute);
+      }
+
       \DB::commit(); //Commit to Data Base
     } catch (\Exception $e) {
       \DB::rollback();//Rollback to Data Base
