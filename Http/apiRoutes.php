@@ -22,4 +22,7 @@ $router->group(['prefix' => '/iquote/v1'], function (Router $router) {
   /*packages-products*/
   require ('ApiRoutes/packageProductRoutes.php');
 
+  /*configs*/
+  require ('ApiRoutes/configRoutes.php');
+
 });
