@@ -47,6 +47,7 @@ class IquoteServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->publishConfig('iquote', 'config');
         $this->publishConfig('iquote', 'permissions');
         $this->publishConfig('iquote', 'settings');
 

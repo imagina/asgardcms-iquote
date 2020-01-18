@@ -6,6 +6,35 @@
     <title>{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" type="text/css" />
     <style type="text/css">
+        @if(config()->has('asgard.iquote.config.fontName'))
+            @font-face {
+            font-family: "{{ config()->get('asgard.iquote.config.fontName') }}";
+            font-weight: normal;
+            font-style : normal;
+            src : url("{{ Module::asset('iquote:fonts/'.config()->get('asgard.iquote.config.fontName').'-Regular.ttf') }}") format("truetype");
+            }
+
+            @font-face {
+                font-family: "{{ config()->get('asgard.iquote.config.fontName') }}";
+                font-weight: bold;
+                font-style : normal;
+                src : url("{{ Module::asset('iquote:fonts/'.config()->get('asgard.iquote.config.fontName').'-Bold.ttf') }}") format("truetype");
+            }
+
+            @font-face {
+                font-family: "{{ config()->get('asgard.iquote.config.fontName') }}";
+                font-weight: normal;
+                font-style : italic;
+                src : url("{{ Module::asset('iquote:fonts/'.config()->get('asgard.iquote.config.fontName').'-Italic.ttf') }}") format("truetype");
+            }
+
+            @font-face {
+                font-family: "{{ config()->get('asgard.iquote.config.fontName') }}";
+                font-weight: bold;
+                font-style : italic;
+                src : url("{{ Module::asset('iquote:fonts/'.config()->get('asgard.iquote.config.fontName').'-BoldItalic.ttf') }}") format("truetype");
+            }
+        @endif
 
         @font-face {
             font-family: "FontAwesomeRegular";
@@ -26,6 +55,27 @@
             src : url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/webfonts/fa-solid-900.ttf") format("truetype");
         }
 
+        .bg-1,.bg-2{
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: 20mm;
+            top: 7px;
+            width: 20mm;
+            height: 40mm;
+            z-index: -1;
+        }
+
+        .bg-1{
+            width: 60mm!important;
+            left: -30px;
+            background-image: url('{{ Module::asset('iquote:img/pdf-bg1.png') }}');
+        }
+
+        .bg-2{
+            right: -40px;
+            background-image: url('{{ Module::asset('iquote:img/pdf-bg2.png') }}');
+        }
+
         .fas,.fab,.far{
             padding-right: 5px;
         }
@@ -34,10 +84,12 @@
             font-weight: bold !important;
             font-family: FontAwesomeSolid !important;
         }
+
         .fas:before{
             font-weight: bold !important;
             font-family: FontAwesomeSolid !important;
         }
+
         .fab{
             font-weight: normal !important;
             font-family: FontAwesomeBrands !important;
@@ -55,10 +107,37 @@
             font-family: FontAwesomeRegular !important;
         }
 
+        .t1 .fas{
+            font-size: 5px;
+        }
+
+        .border-top-radius{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .border-bottom-radius{
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        table.t3{
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid #E5E5E5;
+        }
+
         * {
-            font-family: Verdana, Arial, sans-serif;
+            @if(config()->has('asgard.iquote.config.fontName'))
+                font-family: '{{ config()->get('asgard.iquote.config.fontName') }}', sans-serif;
+            @else
+                font-family: Helvetica, sans-serif;
+            @endif
             box-sizing: border-box;
         }
+
         .mj-column-per-66 {
             width:66.66666666666666%!important;
             display: inline-block!important;
@@ -81,12 +160,13 @@
             top: 0;
             position: absolute;
         }
-        .head-title{
-            background-color: {{ setting('isite::brandPrimary') }};
+        .head-title {
+            background-color: {{ setting('isite::brandPrimary') }}!important;
             color: #fff;
             padding: 8px;
             font-size: 18px;
             z-index: 1;
+            font-weight: bold;
         }
 
         body {
@@ -109,7 +189,7 @@
         }
 
         @page {
-            margin: 80px 25px 40px;
+            margin: 80px 25px 100px;
             size: 215.9mm 279.4mm portrait;
         }
 
@@ -125,17 +205,26 @@
             line-height: 35px;
         }
 
-       .footer {
+        .footer {
             position: fixed;
-            bottom: -40px;
+            bottom: -20px;
             left: 0px;
             right: 0px;
-            height: 50px;
+            height: 100px;
             font-size: 14px;
-
+            margin: 0 -25px -80px;
+            line-height: 1.2;
             /** Extra personal styles **/
-            line-height: 35px;
+            background-color: {{ setting('isite::brandPrimary') }};
+            color: #fff;
         }
+
+        .pagenum:before {
+            content: counter(page);
+            font-weight: bold;
+            padding: 0 5px;
+        }
+
         table, table tr, table tr td{
             page-break-inside: always;
             background-color: transparent;
@@ -157,18 +246,22 @@
             font-weight: bold;
         }
 
+        tr.t1{
+            background-color: #f0f2f4;
+        }
+
         tr.t1 td {
-            border-top: 1px solid #888;
-            border-bottom: 1px solid #888;
-            border-left: 1px solid #888;
-            padding: 10px 5px;
+            border: 1px solid #E5E5E5;
+            padding: 5px;
         }
 
-        tr.t1 td:last-child {
-            border-right: 1px solid #888;
+        tr.t1 td:not(:first-child) {
+            background-color: #fff;
         }
 
-        .table-bg{
+
+
+        .table-bg {
             background-color: #f0f2f4;
             padding: 10px 5px;
         }
@@ -206,16 +299,24 @@
 </head>
 <body>
     <header>
-        <div style="width:100%;cursor:auto;color:#000000;font-family:Ubuntu, sans-serif;line-height:1.5;text-align:right;">
+        <div class="bg-1">
         </div>
-        <p><strong><span style="font-size:10px;">{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span></strong></p>
+        <div class="bg-2">
+        </div>
+        <p style="text-align: right"><strong><span style="font-size:10px;">{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span></strong></p>
         <div id="watermark">
             <img src="{{ setting('isite::logo1') }}" />
         </div>
         <div style="width:100%;text-align: center" class="footer">
-            <div>
-                Copyrights © {{ date('Y') }} All Rights Reserved by <a href='{{ url('/') }}' target="_blank">{{ setting('core::site-name') }}</a>.
+            <div style="padding: 10px 20px 5px">
+               @php
+                $addresses = array_column(json_decode(setting('isite::addresses'),true),'value');
+                $phones = array_column(json_decode(setting('isite::phones'),true),'value');
+                $emails = array_column(json_decode(setting('isite::emails'),true),'value');
+               @endphp
+                @if(count($addresses)>0)<b>{{ trans('iquote::quotes.pdf.address') }} : </b>{{ join($addresses,' - ') }} - @endif @if(count($phones)>0) <b>{{ trans('iquote::quotes.pdf.phone_mini') }} : </b>{{ join($phones,' - ') }} - @endif @if(count($emails)>0) <b>{{ trans('iquote::quotes.pdf.email') }} : </b>{{ join($emails,' - ') }} @endif
             </div>
+            <div class="pagenum"></div>
         </div>
     </header>
     <main>
@@ -224,8 +325,8 @@
                 {!! setting('iquote::pdf-header-text') !!}
             </div>
             <div class="mj-column-per-100"><h1 class="text-primary" style="text-align: center">{{ trans('iquote::iquotes.title.resume') }}</h1></div>
-            <div class="mj-column-per-100 head-title">{{ trans('iquote::iquotes.title.customer_profile') }}</div>
-            <div style="border: 1px solid #888; padding: 10px">
+            <div class="mj-column-per-100 head-title border-top-radius">{{ trans('iquote::iquotes.title.customer_profile') }}</div>
+            <div style="border: 1px solid #E5E5E5;border-top: none;padding: 10px" class="border-bottom-radius">
                 <div class="mj-column-per-33">
                     <p>
                         <div class="text-primary"><strong><i class="fas fa-user"></i>{{ trans('iquote::quotes.pdf.first_name') }}</strong></div>
@@ -233,15 +334,15 @@
                     </p>
                     <p>
                         <div class="text-primary"><strong><i class="fas fa-id-card-alt"></i>{{ trans('iquote::quotes.pdf.document_id') }}</strong></div>
-                        <div>{{ $quote->phone ?? '--' }}</div>
+                        <div>{{ $quote->options->identification ?? '--' }}</div>
                     </p>
                     <p>
                         <div class="text-primary"><strong><i class="fas fa-globe-americas"></i>{{ trans('iquote::quotes.pdf.country') }}</strong></div>
-                        <div>{{ $quote->customer->addresses[0]->country ?? '--' }}</div>
+                        <div>{{ $quote->options->country->label ?? '--' }}</div>
                     </p>
                     <p>
                         <div class="text-primary"><strong><i class="fas fa-thumbtack"></i>{{ trans('iquote::quotes.pdf.city') }}</strong></div>
-                        <div>{{ $quote->customer->addresses[0]->city ?? '--' }}</div>
+                        <div>{{ $quote->options->city->label  ?? '--' }}</div>
                     </p>
                     <p>
                         <div class="text-primary"><strong><i class="fas fa-envelope"></i>{{ trans('iquote::quotes.pdf.email') }}</strong></div>
@@ -255,15 +356,11 @@
                     </p>
                     <p>
                         <div class="text-primary"><strong><i class="fas fa-calendar-day"></i>{{ trans('iquote::quotes.pdf.birthday') }}</strong></div>
-                        <div>{{ $quote->phone ?? '--' }}</div>
+                        <div>{{ $quote->options->birthday ?? '--' }}</div>
                     </p>
                     <p>
                         <div class="text-primary"><strong><i class="fas fa-map-marker-alt"></i>{{ trans('iquote::quotes.pdf.state') }}</strong></div>
-                        <div>{{ $quote->customer->addresses[0]->state ?? '--' }}</div>
-                    </p>
-                    <p>
-                        <div class="text-primary"><strong><i class="fas fa-arrow-circle-right"></i>{{ trans('iquote::quotes.pdf.address') }}</strong></div>
-                        <div>{{ $quote->customer->addresses[0]->address1 ?? '--' }}</div>
+                        <div>{{ $quote->options->department->label  ?? '--' }}</div>
                     </p>
                     <p>
                         <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>{{ trans('iquote::quotes.pdf.phone') }}</strong></div>
@@ -278,16 +375,16 @@
             <div>&nbsp;</div>
             <div class="mj-column-per-100 head-title">{{ trans('iquote::iquotes.title.quote_profile') }}</div>
         </div>
-        <div style="padding: 0 20px;min-height: 400px;width: 100%;font-size: 14px">
+        <div style="padding: 0 15px;min-height: 400px;width: 100%;font-size: 14px">
             {!! $quote->treePdf !!}
             <p>&nbsp;</p>
-            <table width="100%" valign="top">
-                <tfoot>
+            <table width="100%" valign="top" class="t3">
+                <tbody>
                     <tr class="t1">
                         <td class="head-title" width="45%">{{ trans('iquote::iquotes.title.total') }}</td>
-                        <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->total) }} {{ setting('iquote::currency-symbol') }}</b></td>
+                        <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->total) }} {{ \Currency::getLocaleCurrency()->code }}</b></td>
                     </tr>
-                </tfoot>
+                </tbody>
             </table>
             <p>&nbsp;</p>
             <div class="mj-column-per-100">

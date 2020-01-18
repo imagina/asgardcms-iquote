@@ -2,6 +2,7 @@
 
 return [
     'name' => 'Iquote',
+    'fontName' => 'Muli',
     'fields' => [
         'quote' => [
             'name' => [
