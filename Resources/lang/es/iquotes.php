@@ -12,5 +12,11 @@ return [
       'pdf header text' => 'Texto encabezado del PDF',
       'pdf footer text' => 'Texto pie del PDF',
       'currency_symbol' => 'Símbolo de Moneda',
+    ],
+    'config' => [
+        'fake' => [
+            'name' => 'Nombre',
+            'categories' => 'Categorias',
+        ]
     ]
 ];
