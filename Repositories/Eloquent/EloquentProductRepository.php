@@ -75,7 +75,9 @@ class EloquentProductRepository extends EloquentBaseRepository implements Produc
       //Filter by package
       if (isset($filter->package)) {
         $query->whereHas("packages", function ($query) use ($filter) {
-          $query->where('package_id', $filter->package);
+          if ($filter->package != -1){
+            $query->where('package_id', $filter->package);
+          }
         });
       }
     }
