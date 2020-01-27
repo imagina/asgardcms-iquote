@@ -12,6 +12,7 @@ return [
       'pdf header text' => 'Texto encabezado del PDF',
       'pdf footer text' => 'Texto pie del PDF',
       'currency_symbol' => 'Símbolo de Moneda',
+      'allow_custom_package' => 'Permitir paquete personalizado'
     ],
     'config' => [
         'fake' => [

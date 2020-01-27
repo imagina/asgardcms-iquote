@@ -12,6 +12,7 @@ return [
       'pdf header text' => 'PDF Header text',
       'pdf footer text' => 'PDF Footer text',
       'currency_symbol' => 'Currency Symbol',
+      'allow_custom_package' => 'Allow custom package'
     ],
     'config' => [
         'fake' => [
