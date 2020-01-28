@@ -28,6 +28,8 @@ class CharacteristicTransformer extends Resource
       'min' => $this->min ? intval($this->min) : 0,
       'model' => $this->getModel($this->type),
       'checked' => true,
+      'show' => false,
+      'searcheable' => $this->searcheable ? true : false,
       'withNotes' =>  $this->with_notes ? true : false,
       'notes' =>  '',
       'childrengenerated' =>  $this->when($this->type == 4, ''),
