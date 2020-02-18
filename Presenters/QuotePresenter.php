@@ -35,7 +35,10 @@ class QuotePresenter extends Presenter
               $text .= "
                     <tr class='t1'>
                       <td width='45%' class='table-bg'>
-                        <div style='padding-left: ".($total*10)."px;'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</div>                                  
+                        <div style='padding-left: ".($total*10)."px;'>
+                          <i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."
+                          ".($child->notes?"<p>".$child->notes."</p>":"")."
+                        </div>                                  
                       </td>
                       <td width='20%'>
                         " . number_format($child->price) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."
@@ -59,7 +62,10 @@ class QuotePresenter extends Presenter
               $text .= "
                     <tr class='t1'>
                       <td width='45%' class='table-bg'>
-                        <div style='padding-left: ".($total*10)."px;'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</div>                                  
+                        <div style='padding-left: ".($total*10)."px;'>
+                          <i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."
+                          ".($child->notes?"<p>".$child->notes."</p>":"")."
+                        </div>                                  
                       </td>
                       <td width='20%'>
                         " . number_format($child->price ?? $child->model) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."
@@ -82,7 +88,10 @@ class QuotePresenter extends Presenter
             $text .= "
                   <tr class='t1'>
                     <td width='45%' class='table-bg'>
-                      <div style='padding-left: ".($total*10)."px;'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</div>                                  
+                      <div style='padding-left: ".($total*10)."px;'>
+                        <i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."
+                        ".($child->notes?"<p>".$child->notes."</p>":"")."
+                      </div>                                  
                     </td>
                     <td width='55%' colspan='3' align='right'>
                       <div style='padding-right: ".($total*10)."px;'>" . number_format($child->model) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."</div>
@@ -99,7 +108,12 @@ class QuotePresenter extends Presenter
           }else{
             $text .= "
                   <tr class='t1'>
-                    <td class='table-bg'><div style='padding-left: ".($total*10)."px;'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</div></td>
+                    <td class='table-bg'>
+                      <div style='padding-left: ".($total*10)."px;'>
+                        <i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."
+                        ".($child->notes?"<p>".$child->notes."</p>":"")."
+                      </div>
+                    </td>
                     <td colspan='3' align='right'><div style='padding-right: ".($total*10)."px;'>0 ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."</div></td>                  
                   </tr> 
                   <tr class='t2'>
