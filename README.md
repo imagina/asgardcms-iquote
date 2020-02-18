@@ -1,5 +1,7 @@
 # Asgardcms-iquote 
 
+_Nota: Frontend version compatible [qquote 1.0.3](https://github.com/imagina/qquote/tree/1.0.3)_
+
 ## Installation
 
 `composer require imagina/iquote`
