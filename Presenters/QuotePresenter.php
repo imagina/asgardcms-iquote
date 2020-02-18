@@ -33,7 +33,6 @@ class QuotePresenter extends Presenter
           if($child->type === Type::OPTION) {
             if ($selected->model->value == $child->id) {
               $text .= "
-                  <tbody>
                     <tr class='t1'>
                       <td width='45%' class='table-bg'>
                         <div style='padding-left: ".($total*10)."px;'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</div>                                  
@@ -41,9 +40,9 @@ class QuotePresenter extends Presenter
                       <td width='20%'>
                         " . number_format($child->price) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."
                       </td>
-                      <td width='15%' align='center'>".($child->model ?? $child->quantity ?? '1')."</td>
+                      <td width='15%' align='center'>".($child->model ?? $child->quantity ?? '--')."</td>
                       <td width='20%' align='right'>
-                        " . number_format($selected->model->price) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."
+                        <div style='padding-right: ".($total*10)."px;'>" . number_format($selected->model->price) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."</div>
                       </td>                  
                     </tr>
                     <tr class='t2'>
@@ -52,14 +51,12 @@ class QuotePresenter extends Presenter
                           " . $this->treePdf2($child->characteristics ?? $child->children_generated ?? $child->children ?? '', $child ?? '',$total+1) . "                         
                         </table>
                       </td>
-                    </tr>
-                  </tbody>                                 
+                    </tr>                               
               ";
             }
           }else if($child->type==Type::CHECKBOX || $child->type == Type::NUMBER) {
             if($child->model > 0) {
               $text .= "
-                  <tbody>
                     <tr class='t1'>
                       <td width='45%' class='table-bg'>
                         <div style='padding-left: ".($total*10)."px;'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</div>                                  
@@ -67,9 +64,9 @@ class QuotePresenter extends Presenter
                       <td width='20%'>
                         " . number_format($child->price ?? $child->model) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."
                       </td>
-                      <td width='15%' align='center'>".($child->model ?? $child->quantity ?? '1')."</td>
+                      <td width='15%' align='center'>".($child->model ?? $child->quantity ?? '--')."</td>
                       <td width='20%' align='right'>
-                        " . number_format($child->price * ($child->model ?? $child->quantity ?? 1)) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."
+                        <div style='padding-right: ".($total*10)."px;'>" . number_format($child->price * ($child->model ?? $child->quantity ?? 1)) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."</div>
                       </td>                  
                     </tr>
                     <tr class='t2'>
@@ -78,23 +75,17 @@ class QuotePresenter extends Presenter
                             " . $this->treePdf2($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? '',$total+1) . "
                         </table>
                       </td>
-                    </tr>  
-                  </tbody>                    
+                    </tr>                    
                 ";
             }
           }else if($child->type == Type::VALUE && $child->model > 0){
             $text .= "
-                <tbody>
                   <tr class='t1'>
                     <td width='45%' class='table-bg'>
                       <div style='padding-left: ".($total*10)."px;'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</div>                                  
                     </td>
-                    <td width='20%'>
-                      " . number_format($child->model) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."
-                    </td>
-                    <td width='15%' align='center'>1</td>
-                    <td width='20%' align='right'>
-                      " . number_format($child->model) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."
+                    <td width='55%' colspan='3' align='right'>
+                      <div style='padding-right: ".($total*10)."px;'>" . number_format($child->model) . " ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."</div>
                     </td>                  
                   </tr>
                   <tr class='t2'>
@@ -103,15 +94,13 @@ class QuotePresenter extends Presenter
                         ".$this->treePdf2($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? '',$total+1)."                        
                       </table>
                     </td>
-                  </tr>
-                </tbody>               
+                  </tr>               
               ";
           }else{
             $text .= "
-                <tbody>
                   <tr class='t1'>
-                    <td class='table-bg'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</td>
-                    <td colspan='3'>&nbsp;</td>                  
+                    <td class='table-bg'><div style='padding-left: ".($total*10)."px;'><i class='fas fa-square text-primary'></i>".($child->name ?? $child->title)."</div></td>
+                    <td colspan='3' align='right'><div style='padding-right: ".($total*10)."px;'>0 ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."</div></td>                  
                   </tr> 
                   <tr class='t2'>
                     <td colspan='4'>
@@ -119,36 +108,43 @@ class QuotePresenter extends Presenter
                         ".$this->treePdf2($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? '',$total+1)."
                       </table>
                     </td>
-                  </tr>   
-                </tbody>             
+                  </tr>             
               ";
           }
         }else{
           $text .=
             "<table width='100%' valign='top' cellspacing='0' cellpadding='0' class='t3'>
-                <thead>
-                  <tr class='t1'>
-                    <td class='head-title' width='45%'>".($child->name ?? $child->title)."</td>
-                    <td colspan='3'>&nbsp;</td>
+                <tbody>
+                  <tr>
+                    <td class='text-primary text-bold' colspan='4' align='center'><span style='font-size: 18px'>".($child->name ?? $child->title)."</span></td>
                   </tr>
-                  <tr class='t1'>
-                    <td width='45%' class='table-bg'>&nbsp;</td>               
-                    <td width='20%'>".trans('iquote::quotes.pdf.unit_value')."</td>
-                    <td width='15%' align='center'>".trans('iquote::quotes.pdf.quantity')."</td>
-                    <td width='20%' align='right'>Total</td>
-                  </tr>            
-                </thead>
-                  ".$this->treePdf2($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? '',$total+1)."                
+                  <tr>
+                    <td align='center' width='45%'>
+                      <div style='padding: 10px 0;width: 100%'>
+                        <img src='".$child->main_image->path."' width='120mm' height='auto' title='".($child->name ?? $child->title)."' />
+                      </div>
+                    </td>
+                    <td colspan='3' valign='middle'>
+                      <div style='padding: 10px'>".($child->description)."</div>
+                    </td>
+                  </tr>
+                  <tr class='t1 text-bold'>
+                    <td width='45%' class='head-title'>".($child->name ?? $child->title)."</td>               
+                    <td width='20%' class='text-primary'>".trans('iquote::quotes.pdf.unit_value')."</td>
+                    <td width='15%' class='text-primary' align='center'>".trans('iquote::quotes.pdf.quantity')."</td>
+                    <td width='20%' class='text-primary' align='right'>Total</td>
+                  </tr>
+                  ".$this->treePdf2($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? '',$total+1)."
+                </tbody>
                 <tfoot>
                   ".(isset($child->characteristics) || isset($child->childrengenerated) || isset($child->children)?"
                     <tr class='t1 text-bold'>
-                      <td class='text-primary table-bg' width='45%'>Total ".($child->name ?? $child->title)."</td>
-                      <td colspan='3' align='right' class='text-primary'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."</td>
+                      <td class='text-primary table-bg' width='45%'><div style='padding-left: 10px;'>Total ".($child->name ?? $child->title)."</div></td>
+                      <td colspan='3' align='right' class='text-primary'><div style='padding-right: 10px;'>".number_format($this->calculateTotal($child->characteristics ?? $child->childrengenerated ?? $child->children ?? '', $child ?? ''))." ".($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code)."</div></td>
                     </tr>
                     ":"")."
                 </tfoot>
-              </table>
-              <div>&nbsp;</div>
+              </table>                            
               ";
         }
       }

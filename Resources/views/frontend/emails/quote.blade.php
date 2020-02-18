@@ -39,13 +39,13 @@
         }
 
         .border-top-radius{
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
         }
 
         .border-bottom-radius{
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 7px;
+            border-bottom-right-radius: 7px;
         }
 
         * {
@@ -61,7 +61,7 @@
             border-collapse: separate;
             border-spacing: 0;
             overflow: hidden;
-            border-radius: 10px;
+            border-radius: 7px;
             border: 1px solid #E5E5E5;
         }
 
@@ -185,68 +185,30 @@
     </div>
 </header>
 <main>
+    @php
+      $mailContent = ['nombre' => $quote->firstName.' '.$quote->lastName];
+      $search = [];
+      $replace = [];
+      foreach($mailContent as $index=>$value){
+          $search[] = '{'.$index.'}';
+          $replace[] = $value;
+      }
+    @endphp
     <div class="page-break" style="width:100%;font-size:14px;text-align:left;padding: 15px">
-        <div class="mj-column-per-100"><h1 class="text-primary" style="text-align: center">{{ trans('iquote::iquotes.title.resume') }}</h1></div>
-        <div class="mj-column-per-100 head-title border-top-radius">{{ trans('iquote::iquotes.title.customer_profile') }}</div>
-        <div style="border: 1px solid #E5E5E5; padding: 10px" class="border-bottom-radius">
-            <div class="mj-column-per-33">
-                <p>
-                <div class="text-primary"><strong><i class="fas fa-user"></i>{{ trans('iquote::quotes.pdf.first_name') }}</strong></div>
-                <div>{{ $quote->firstName }}</div>
-                </p>
-                <p>
-                <div class="text-primary"><strong><i class="fas fa-id-card-alt"></i>{{ trans('iquote::quotes.pdf.document_id') }}</strong></div>
-                <div>{{ $quote->options->identification ?? '--' }}</div>
-                </p>
-                <p>
-                <div class="text-primary"><strong><i class="fas fa-globe-americas"></i>{{ trans('iquote::quotes.pdf.country') }}</strong></div>
-                <div>{{ $quote->options->country->label ?? '--' }}</div>
-                </p>
-                <p>
-                <div class="text-primary"><strong><i class="fas fa-thumbtack"></i>{{ trans('iquote::quotes.pdf.city') }}</strong></div>
-                <div>{{ $quote->options->city->label  ?? '--' }}</div>
-                </p>
-                <p>
-                <div class="text-primary"><strong><i class="fas fa-envelope"></i>{{ trans('iquote::quotes.pdf.email') }}</strong></div>
-                <div>{{ $quote->email ?? '--' }}</div>
-                </p>
+        <div id="contend-mail" class="p-3">
+            <div class="text-primary head-text">
+                <strong>
+                    <span style="font-size:10px;">{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span>
+                </strong>
             </div>
-            <div class="mj-column-per-33">
-                <p>
-                <div class="text-primary"><strong><i class="far fa-user"></i>{{ trans('iquote::quotes.pdf.last_name') }}</strong></div>
-                <div>{{ $quote->lastName }}</div>
-                </p>
-                <p>
-                <div class="text-primary"><strong><i class="fas fa-calendar-day"></i>{{ trans('iquote::quotes.pdf.birthday') }}</strong></div>
-                <div>{{ $quote->options->birthday ?? '--' }}</div>
-                </p>
-                <p>
-                <div class="text-primary"><strong><i class="fas fa-map-marker-alt"></i>{{ trans('iquote::quotes.pdf.state') }}</strong></div>
-                <div>{{ $quote->options->department->label  ?? '--' }}</div>
-                </p>
-                <p>
-                <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>{{ trans('iquote::quotes.pdf.phone') }}</strong></div>
-                <div>{{ $quote->phone ?? '--' }}</div>
-                </p>
+            <div style="margin-bottom: 5px" class="text-primary">
+                {!! str_replace($search,$replace,setting('iquote::email-text')) !!}
             </div>
-            <div class="mj-column-per-33">
-                <div class="text-primary"><strong><i class="fas fa-comment-dots"></i>{{ trans('iquote::quotes.pdf.notes') }}</strong></div>
-                <div>{!! $quote->notes ?? '--' !!}</div>
+            <div style="margin-bottom: 5px">
+                <p class="text-primary"><button class="btn btn-danger"><a href="{{ route('iquote.pdf',['quote'=>$quote->id]) }}" target="_blank">{{ trans('iquote::quotes.buttons.view_quote') }}</a></button></p>
             </div>
+            <p class="text-primary"><b>{{ trans('iquote::quotes.messages.copy_quote_link') }}</b> {{ route('iquote.pdf',['quote'=>$quote->id]) }}</p>
         </div>
-        <div>&nbsp;</div>
-        <div class="mj-column-per-100 head-title">{{ trans('iquote::iquotes.title.quote_profile') }}</div>
-    </div>
-    <div style="padding: 0 20px;min-height: 400px;width: 100%;font-size: 14px">
-        {!! $quote->treePdf !!}
-        <table width="100%" valign="top" class="t3">
-            <tbody>
-            <tr class="t1">
-                <td class="head-title" width="45%">{{ trans('iquote::iquotes.title.total') }}</td>
-                <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->total) }} {{ \Currency::getLocaleCurrency()->code }}</b></td>
-            </tr>
-            </tbody>
-        </table>
     </div>
     <p>&nbsp;</p>
     <div style="width:100%;text-align: center">
@@ -260,5 +222,11 @@
         </div>
     </div>
 </main>
+    <script type="text/javascript">
+      var lNode = document.createElement("link");
+      lNode.setAttribute("rel", "stylesheet");
+      lNode.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css");
+      document.getElementsByTagName("head")[0].appendChild(lNode)
+    </script>
 </body>
 </html>

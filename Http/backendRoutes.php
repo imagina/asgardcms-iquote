@@ -159,6 +159,7 @@ $router->group(['prefix' =>'/iquote'], function (Router $router) {
         'uses' => 'QuoteController@edit',
         'middleware' => 'can:iquote.quotes.edit'
     ]);
+
     $router->put('quotes/{quote}', [
         'as' => 'admin.iquote.quote.update',
         'uses' => 'QuoteController@update',

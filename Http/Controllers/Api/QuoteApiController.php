@@ -112,7 +112,7 @@ class QuoteApiController extends BaseApiController
       if (isset($data['is_downloading']) && $data['is_downloading']){
         event(new QuoteIsDownloading(json_decode(json_encode($dataQuote))));
         $pdfRoute = "modules/iquote/pdf/quote".str_pad($quote->id,5,"0",STR_PAD_LEFT).".pdf";
-        $response["isDownloading"] = url($pdfRoute);
+        $response["isDownloading"] = route('iquote.pdf',['quote'=>$quote->id]);
       }
 
       \DB::commit(); //Commit to Data Base

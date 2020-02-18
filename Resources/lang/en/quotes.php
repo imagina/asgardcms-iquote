@@ -29,12 +29,16 @@ return [
       'email' => 'Email',
       'phone' => 'Phone or Cell',
       'phone_mini' => 'Phone',
-      'notes' => 'Additional Notes',
+      'notes' => 'Special Notes:',
       'unit_value' => 'Unit Value',
       'quantity' => 'Quantity',
     ],
     'messages' => [
+      'copy_quote_link' => "Or copy this link in navigator bar:"
     ],
     'validation' => [
+    ],
+    'buttons'=> [
+      'view_quote' => "Click for view Quote"
     ],
 ];

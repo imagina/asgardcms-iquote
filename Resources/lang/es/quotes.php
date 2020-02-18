@@ -29,12 +29,16 @@ return [
       'email' => 'Correo',
       'phone' => 'Celular o Teléfono',
       'phone_mini' => 'Teléfono',
-      'notes' => 'Notas Adicionales',
+      'notes' => 'Notas Especiales:',
       'unit_value' => 'Valor Unidad',
       'quantity' => 'Cantidad',
     ],
     'messages' => [
+      'copy_quote_link' => "O copia este enlace en la barra del navegador:"
     ],
     'validation' => [
+    ],
+    'buttons'=> [
+      'view_quote' => "Click para ver cotización"
     ],
 ];
