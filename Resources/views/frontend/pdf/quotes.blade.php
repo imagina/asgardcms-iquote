@@ -311,7 +311,7 @@
                 </div>
                 <div class="mj-column-per-20">
                     <div style="word-wrap: break-word;margin: 20px -15px">
-                        <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">https://migrate-au.com</a></div>
+                        <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">{{ url('') }}</a></div>
                         <div class="pagenum"></div>
                     </div>
                 </div>
