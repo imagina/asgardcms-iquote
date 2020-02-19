@@ -19,6 +19,7 @@ class ProductTransformer extends Resource
       'description' => $this->when($this->description, $this->description),
       'createdAt' => $this->when($this->created_at, $this->created_at),
       'mainImage' => $this->main_image,
+      'includeInQuotation' => $this->include_in_quotation ? true : false,
       'characteristics' => CharacteristicTransformer::collection($this->whenLoaded('characteristics')),
       'packages' => PackageTransformer::collection($this->whenLoaded('packages')),
     ];
