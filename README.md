@@ -1,6 +1,6 @@
-# Asgardcms-iquote 
+# Asgardcms-iquote  v1.0.5
 
-_Nota: Frontend version compatible [qquote 1.0.3](https://github.com/imagina/qquote/tree/1.0.3)_
+_Nota: Frontend version compatible [qquote 1.0.5](https://github.com/imagina/qquote/tree/1.0.5)_
 
 ## Installation
 
