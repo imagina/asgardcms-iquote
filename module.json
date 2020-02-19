@@ -3,7 +3,7 @@
     "alias": "iquote",
     "description": "",
     "keywords": [],
-    "version": "1.0.5",
+    "version": "1.0.8",
 	"active": 1,
     "order": 1,
     "providers": [

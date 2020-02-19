@@ -4,7 +4,7 @@ return [
     'name' => 'Iquote',
     'fontName' => 'Muli',
     'fields' => [
-        'quote' => [
+/*        'quote' => [
             'name' => [
                 'className' => 'col-xs-12 col-md-6',
                 'value' => '',
@@ -30,6 +30,6 @@ return [
         ],
         'product' => [],
         'characteristic' => [],
-        'package' => [],
+        'package' => [],*/
     ]
 ];
