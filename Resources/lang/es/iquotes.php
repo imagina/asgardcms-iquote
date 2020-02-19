@@ -14,7 +14,12 @@ return [
       'pdf footer text' => 'Texto pie del PDF',
       'email text' => 'Texto del Email',
       'currency_symbol' => 'Símbolo de Moneda',
-      'allow_custom_package' => 'Permitir paquete personalizado'
+      'allow_custom_package' => 'Permitir paquete personalizado',
+      'logo_header' => "Header Logo",
+      'logo_footer1' => "Footer Logo 1",
+      'logo_footer2' => "Footer Logo 2",
+      'logo_footer3' => "Footer Logo 3",
+      'logo_footer4' => "Footer Logo 4",
     ],
     'config' => [
         'fake' => [

@@ -25,4 +25,24 @@ return [
     'view' => 'text',
     'translatable' => true,
   ],
+  'logo-header' => [
+    'description' => 'iquote::iquotes.setting.logo_header',
+    'view' => 'isite::admin.fields.file',
+  ],
+  'logo-footer1' => [
+    'description' => 'iquote::iquotes.setting.logo_footer1',
+    'view' => 'isite::admin.fields.file',
+  ],
+  'logo-footer2' => [
+    'description' => 'iquote::iquotes.setting.logo_footer2',
+    'view' => 'isite::admin.fields.file',
+  ],
+  'logo-footer3' => [
+    'description' => 'iquote::iquotes.setting.logo_footer3',
+    'view' => 'isite::admin.fields.file',
+  ],
+  'logo-footer4' => [
+    'description' => 'iquote::iquotes.setting.logo_footer4',
+    'view' => 'isite::admin.fields.file',
+  ],
 ];

@@ -295,7 +295,7 @@
         @endphp
         <header>
             <div class="bg-1">
-                <img src="https:{{ Module::asset('iquote:img/cabezote1.png') }}" />
+                <img src="{{ setting('iquote::logo-header') }}" />
                 <div class="text-primary head-text">
                     <strong>
                         <span style="font-size:10px;">{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span>
@@ -303,24 +303,64 @@
                 </div>
             </div>
             <div style="width:100%" class="footer">
-                <div class="mj-column-per-20">
-                    <img src="https:{{ Module::asset('iquote:img/img-footer-1.png') }}" width="100%" height="auto" />
-                </div>
-                <div class="mj-column-per-20">
+                @php
+                    $imgs = ['logo-footer1','logo-footer2'];
+                    $i=0;
+                @endphp
+                @foreach($imgs as $img)
+                    @if(setting('iquote::'.$img))
+                        <div class="mj-column-per-20">
+                            <img src="{{ setting('iquote::'.$img) }}" width="100%" height="auto" />
+                        </div>
+                        @php
+                          $i++;
+                        @endphp
+                    @endif
+                @endforeach
+                @for($j=$i;$j<2;$j++)
+                    <div class="mj-column-per-20">
+                        &nbsp;
+                    </div>
+                @endfor
+                {{--<div class="mj-column-per-20">
                     <img src="https:{{ Module::asset('iquote:img/img-footer-2.png') }}" width="100%" height="auto" />
-                </div>
+                </div>--}}
                 <div class="mj-column-per-20">
                     <div style="word-wrap: break-word;margin: 20px -15px">
                         <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">{{ url('') }}</a></div>
+                        {{--<div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">https://migrate-au.com</a></div>--}}
                         <div class="pagenum"></div>
                     </div>
                 </div>
-                <div class="mj-column-per-20">
+                @php
+                    $imgs = ['logo-footer3','logo-footer4'];
+                    $i=0;
+                @endphp
+                @foreach($imgs as $img)
+                    @if(setting('iquote::'.$img))
+                        @php
+                            $i++;
+                        @endphp
+                    @endif
+                @endforeach
+                @for($j=$i;$j<2;$j++)
+                    <div class="mj-column-per-20">
+                        &nbsp;
+                    </div>
+                @endfor
+                @foreach($imgs as $img)
+                    @if(setting('iquote::'.$img))
+                        <div class="mj-column-per-20">
+                            <img src="{{ setting('iquote::'.$img) }}" width="100%" height="auto" />
+                        </div>
+                    @endif
+                @endforeach
+                {{--<div class="mj-column-per-20">
                     <img src="https:{{ Module::asset('iquote:img/img-footer-3.png') }}" width="100%" height="auto" />
                 </div>
                 <div class="mj-column-per-20">
                     <img src="https:{{ Module::asset('iquote:img/img-footer-4.png') }}" width="100%" height="auto" />
-                </div>
+                </div>}}--
                 {{--<div style="padding: 10px 20px 5px">
 
                    @php
@@ -418,6 +458,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <div style="padding-bottom: 15px">
+                    <p>{!! setting('iquote::pdf-footer-text') ?? '' !!}</p>
+                </div>
             </div>
         </main>
     </body>
