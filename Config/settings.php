@@ -1,5 +1,10 @@
 <?php
 return [
+  'allow_register_new_users' => [
+    'description' => 'iquote::iquotes.setting.allow_register_new_users',
+    'view' => 'checkbox',
+    'translatable' => false,
+  ],
   'allow_custom_package' => [
     'description' => 'iquote::iquotes.setting.allow_custom_package',
     'view' => 'checkbox',

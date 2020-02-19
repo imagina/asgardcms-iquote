@@ -10,6 +10,7 @@ return [
         'quote_profile' => 'Quote Profile',
     ],
     'setting' => [
+      'allow_register_new_users' => 'Allow register new users',
       'pdf header text' => 'PDF Header text',
       'pdf footer text' => 'PDF Footer text',
       'email text' => 'Email Text',

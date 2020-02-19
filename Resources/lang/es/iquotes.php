@@ -10,6 +10,7 @@ return [
         'quote_profile' => 'Perfil de la Cotización',
     ],
     'setting' => [
+      'allow_register_new_users' => 'Permitir registrar nuevos usuarios',
       'pdf header text' => 'Texto encabezado del PDF',
       'pdf footer text' => 'Texto pie del PDF',
       'email text' => 'Texto del Email',
