@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use DB;
+
 
 class AlterCharacteristicsPriceColumn extends Migration
 {
@@ -26,6 +26,8 @@ class AlterCharacteristicsPriceColumn extends Migration
      */
     public function down()
     {
-        //
+      Schema::table('iquote__characteristics', function (Blueprint $table) {
+        $table->dropColumn('price');
+      });
     }
 }

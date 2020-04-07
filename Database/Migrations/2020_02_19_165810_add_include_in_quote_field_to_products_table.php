@@ -26,7 +26,7 @@ class AddIncludeInQuoteFieldToProductsTable extends Migration
     public function down()
     {
         Schema::table('iquote__products', function (Blueprint $table) {
-          $table->boolean('include_in_quotation');
+          $table->dropColumn('include_in_quotation');
         });
     }
 }
