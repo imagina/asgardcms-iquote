@@ -26,6 +26,8 @@ class AlterCharacteristicsPriceColumn extends Migration
      */
     public function down()
     {
-        //
+      Schema::table('iquote__characteristics', function (Blueprint $table) {
+        $table->dropColumn('price');
+      });
     }
 }
