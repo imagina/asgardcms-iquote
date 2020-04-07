@@ -21,6 +21,7 @@ class Product extends Model
   protected $fillable = [
     'active',
     'price',
+    'include_in_quotation',
   ];
 
 
@@ -37,7 +38,7 @@ class Product extends Model
   {
     return $this->hasMany(Characteristic::class);
   }
-  
+
   public function getMainImageAttribute()
   {
     $thumbnail = $this->files()->where('zone', 'mainimage')->first();

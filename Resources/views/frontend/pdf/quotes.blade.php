@@ -56,12 +56,9 @@
             }
 
             .bg-1{
-                position: absolute;
-                top: 0;
-                left: 0;
-                margin: 0 -25px;
                 width: 100%;
                 height: 30mm;
+                position: relative;
                 z-index: -1;
             }
             .bg-1 img{
@@ -72,8 +69,7 @@
             .bg-1 .head-text{
                 position: absolute;
                 text-align: right;
-                padding-right: 25px;
-                top: 20mm;
+                top: 25mm;
                 right: 0;
                 width: 100%;
             }
@@ -209,7 +205,7 @@
             }
 
             @page {
-                margin: 120px 25px 90px;
+                margin: 20px 25px 90px;
                 size: 215.9mm 279.4mm portrait;
             }
 
@@ -275,6 +271,10 @@
                 padding: 5px;
             }
 
+            .t2 table{
+                border-right: 1px solid #E5E5E5;
+            }
+
             tr.t1 td:not(:first-child) {
                 background-color: #fff;
             }
@@ -289,19 +289,7 @@
         </style>
     </head>
     <body>
-        @php
-          /*$user = Auth::user();
-          $currentUser = json_decode(json_encode(new Modules\Iprofile\Transformers\UserTransformer(Auth::user())));*/
-        @endphp
         <header>
-            <div class="bg-1">
-                <img src="{{ setting('iquote::logo-header') }}" />
-                <div class="text-primary head-text">
-                    <strong>
-                        <span style="font-size:10px;">{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span>
-                    </strong>
-                </div>
-            </div>
             <div style="width:100%" class="footer">
                 @php
                     $imgs = ['logo-footer1','logo-footer2'];
@@ -327,8 +315,8 @@
                 </div>--}}
                 <div class="mj-column-per-20">
                     <div style="word-wrap: break-word;margin: 20px -15px">
-                        <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">{{ url('') }}</a></div>
-                        {{--<div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">https://migrate-au.com</a></div>--}}
+                        {{--<div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">{{ url('') }}</a></div>--}}
+                        <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">https://migrate-au.com</a></div>
                         <div class="pagenum"></div>
                     </div>
                 </div>
@@ -375,6 +363,14 @@
         </header>
         <main>
             <div style="width:100%;font-size:14px;text-align:left;padding: 15px" class="page-break">
+                <div class="bg-1">
+                    <img src="{{ setting('iquote::logo-header') }}" />
+                    <div class="text-primary head-text">
+                        <strong>
+                            <span style="font-size:10px;">{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span>
+                        </strong>
+                    </div>
+                </div>
                 {{--<div class="mj-column-per-100">
                     {!! setting('iquote::pdf-header-text') !!}
                 </div>--}}
@@ -384,7 +380,7 @@
                     <div class="mj-column-per-66">
                         <p>
                         <div class="text-primary"><strong><i class="fas fa-user"></i>{{ trans('iquote::quotes.pdf.first_name') }}</strong></div>
-                        <div>{{ $quote->user->fullName ?? '--' }}</div>
+                        <div>{{ $quote->user->first_name.' '.$quote->user->last_name ?? '--' }}</div>
                         </p>
                     </div>
                     <div class="mj-column-per-33">
@@ -399,7 +395,7 @@
                     <div class="mj-column-per-33">
                         <p>
                             <div class="text-primary"><strong><i class="fas fa-user"></i>{{ trans('iquote::quotes.pdf.first_name') }}</strong></div>
-                            <div>{{ $quote->firstName }}</div>
+                            <div>{{ $quote->first_name }}</div>
                         </p>
                         <p>
                             <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>{{ trans('iquote::quotes.pdf.phone') }}</strong></div>
@@ -417,7 +413,7 @@
                     <div class="mj-column-per-33">
                         <p>
                             <div class="text-primary"><strong><i class="far fa-user"></i>{{ trans('iquote::quotes.pdf.last_name') }}</strong></div>
-                            <div>{{ $quote->lastName }}</div>
+                            <div>{{ $quote->last_name }}</div>
                         </p>
                         <p>
                             <div class="text-primary"><strong><i class="fas fa-envelope"></i>{{ trans('iquote::quotes.pdf.email') }}</strong></div>
@@ -445,19 +441,21 @@
                 <div class="mj-column-per-100 head-title" style="text-align: center">{{ trans('iquote::iquotes.title.quote_profile') }}</div>
             </div>
             <div style="padding: 0 15px;min-height: 400px;width: 100%;font-size: 14px">
-                {!! $quote->treePdf !!}
-                <div style="padding-bottom: 15px">
-                    <p><span class="text-primary text-bold">{{ trans('iquote::quotes.pdf.notes') }}</span></p>
-                    <p>{!! $quote->notes ?? '--' !!}</p>
-                </div>
+                {!! $quote->present()->treePdf(true) !!}
                 <table width="100%" valign="top" class="t3">
                     <tbody>
                         <tr class="t1">
                             <td class="head-title" width="45%">{{ trans('iquote::iquotes.title.total') }}</td>
-                            <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->total) }} {{ \Currency::getLocaleCurrency()->code }}</b></td>
+                            <td width="55%" align="right" class="text-primary"><b>{{ number_format($quote->present()->total()) }} {{ \Currency::getLocaleCurrency()->code }}</b></td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="mj-column-per-100"><h2 class="text-primary" style="text-align: center">{{ trans('iquote::iquotes.title.other_prices') }}</h2></div>
+                {!! $quote->present()->treePdf(false) !!}
+                <div style="padding-top: 15px">
+                    <p><span class="text-primary text-bold">{{ trans('iquote::quotes.pdf.notes') }}</span></p>
+                    <p>{!! $quote->notes ?? '--' !!}</p>
+                </div>
                 <div style="padding-bottom: 15px">
                     <p>{!! setting('iquote::pdf-footer-text') ?? '' !!}</p>
                 </div>

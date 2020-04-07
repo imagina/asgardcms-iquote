@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
-class AlterCharacteristicsPriceColumn extends Migration
+class AddIncludeInQuoteFieldToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +13,9 @@ class AlterCharacteristicsPriceColumn extends Migration
      */
     public function up()
     {
-      Schema::table('iquote__characteristics', function (Blueprint $table) {
-        $table->float('price',12,2)->change();
-      });
+        Schema::table('iquote__products', function (Blueprint $table) {
+          $table->boolean('include_in_quotation')->default(true);
+        });
     }
 
     /**
@@ -26,6 +25,8 @@ class AlterCharacteristicsPriceColumn extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('iquote__products', function (Blueprint $table) {
+          $table->boolean('include_in_quotation');
+        });
     }
 }

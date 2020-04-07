@@ -29,7 +29,7 @@ class Quote extends Model
 
   protected $casts = [
     'value' => 'array',
-    'options' => 'array',
+    'options' => 'object',
   ];
 
   public function user()

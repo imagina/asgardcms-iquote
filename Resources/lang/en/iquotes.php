@@ -8,6 +8,7 @@ return [
         'customer_profile' => 'Traveler Data',
         'consultant_profile' => 'Consultant',
         'quote_profile' => 'Quote Profile',
+        'other_prices' => 'Other Prices',
     ],
     'setting' => [
       'allow_register_new_users' => 'Allow register new users',

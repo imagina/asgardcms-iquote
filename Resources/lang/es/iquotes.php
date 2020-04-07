@@ -8,6 +8,7 @@ return [
         'customer_profile' => 'Datos del Viajero',
         'consultant_profile' => 'Asesor',
         'quote_profile' => 'Perfil de la Cotización',
+        'other_prices' => 'Otros Precios',
     ],
     'setting' => [
       'allow_register_new_users' => 'Permitir registrar nuevos usuarios',
