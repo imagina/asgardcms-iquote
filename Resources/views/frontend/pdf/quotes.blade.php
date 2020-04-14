@@ -380,7 +380,7 @@
                     <div class="mj-column-per-66">
                         <p>
                         <div class="text-primary"><strong><i class="fas fa-user"></i>{{ trans('iquote::quotes.pdf.first_name') }}</strong></div>
-                        <div>{{ $quote->user->first_name.' '.$quote->user->last_name ?? '--' }}</div>
+                        <div>{{ ($quote->user->first_name ?? '--') . ' ' . ($quote->user->last_name ?? '--') }}</div>
                         </p>
                     </div>
                     <div class="mj-column-per-33">

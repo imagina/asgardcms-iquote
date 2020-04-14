@@ -39,6 +39,7 @@ class PublicController extends BasePublicController
         $this->pdf->setPaper('Letter','portrait');
         return $this->pdf->stream();
       } catch (\Exception $e) {
+          \Log::error($e->getMessage().' '.$e->getFile().' '.$e->getLine());
         return redirect()->to('/')
           ->withErrors(["error"=>"Error: ".$e->getMessage()." - Line ".$e->getLine()]);
       }
