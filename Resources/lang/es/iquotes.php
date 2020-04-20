@@ -5,7 +5,7 @@ return [
         'iquotes' => 'Cotización',
         'total' => 'Gran Total',
         'resume' => 'Resumen de Cotización',
-        'customer_profile' => 'Datos del Viajero',
+        'customer_profile' => 'Datos del Cliente',
         'consultant_profile' => 'Asesor',
         'quote_profile' => 'Perfil de la Cotización',
         'other_prices' => 'Otros Precios',

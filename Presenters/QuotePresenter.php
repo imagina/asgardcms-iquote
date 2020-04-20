@@ -117,44 +117,46 @@ class QuotePresenter extends Presenter
           $paidTotal = $this->calculateTotal($child->children ?? $child->childrengenerated ?? $child->characteristics ?? '', $child ?? '');
           $included = isset($child->include_in_quotation)?$child->include_in_quotation:false;
           if($included===$show_included) {
-            $text .=
-              "<table width='100%' valign='top' cellspacing='0' cellpadding='0' class='t3'>
-                <tbody>
-                " . (strpos($child->main_image->path,'default.jpg') === false ? "
-                  <tr>
-                    <td class='text-primary text-bold' colspan='4' align='center'><span style='font-size: 18px'>" . ($child->name ?? $child->title) . "</span></td>
-                  </tr>
-                  <tr>
-                    <td align='center' ".(isset($child->description)?"":"colspan='4'").">
-                      <div style='padding: 10px;'>
-                        <img src='" . $child->main_image->path . "' width='120mm' height='auto' title='" . ($child->name ?? $child->title) . "' />
-                      </div>
-                    </td>
-                    ".(isset($child->description)?"
-                    <td colspan='3' valign='middle'>
-                      <div style='padding: 10px'>" . ($child->description) . "</div>
-                    </td>
-                    ":"")."
-                  </tr>
-                  " : "") . "
-                  <tr class='t1 text-bold'>
-                    <td width='45%' class='head-title'>" . ($child->name ?? $child->title) . "</td>               
-                    <td width='20%' class='text-primary'>" . trans('iquote::quotes.pdf.unit_value') . "</td>
-                    <td width='15%' class='text-primary' align='center'>" . trans('iquote::quotes.pdf.quantity') . "</td>
-                    <td width='20%' class='text-primary' align='right'>Total</td>
-                  </tr>
-                  " . $this->treePdf2($child->children ?? $child->childrengenerated ?? $child->characteristics ?? '', $child ?? '', $total + 1) . "
-                </tbody>
-                <tfoot>
-                  " . (isset($child->characteristics) || isset($child->childrengenerated) || isset($child->children) ? "
-                    <tr class='t1 text-bold'>
-                      <td class='text-primary table-bg' width='45%'><div style='padding-left: 10px;'>Total " . ($child->name ?? $child->title) . "</div></td>
-                      <td colspan='3' align='right' class='text-primary'><div style='padding-right: 10px;'>" . number_format($paidTotal) . " " . ($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code) . "</div></td>
-                    </tr>
-                    " : "") . "
-                </tfoot>
-              </table>                            
-            ";
+            if($child->checked) {
+                $text .=
+                    "<table width='100%' valign='top' cellspacing='0' cellpadding='0' class='t3'>
+                    <tbody>
+                    " . (strpos($child->main_image->path, 'default.jpg') === false ? "
+                      <tr>
+                        <td class='text-primary text-bold' colspan='4' align='center'><span style='font-size: 18px'>" . ($child->name ?? $child->title) . "</span></td>
+                      </tr>
+                      <tr>
+                        <td align='center' " . (isset($child->description) ? "" : "colspan='4'") . ">
+                          <div style='padding: 10px;'>
+                            <img src='" . $child->main_image->path . "' width='120mm' height='auto' title='" . ($child->name ?? $child->title) . "' />
+                          </div>
+                        </td>
+                        " . (isset($child->description) ? "
+                        <td colspan='3' valign='middle'>
+                          <div style='padding: 10px'>" . ($child->description) . "</div>
+                        </td>
+                        " : "") . "
+                      </tr>
+                      " : "") . "
+                      <tr class='t1 text-bold'>
+                        <td width='45%' class='head-title'>" . ($child->name ?? $child->title) . "</td>               
+                        <td width='20%' class='text-primary'>" . trans('iquote::quotes.pdf.unit_value') . "</td>
+                        <td width='15%' class='text-primary' align='center'>" . trans('iquote::quotes.pdf.quantity') . "</td>
+                        <td width='20%' class='text-primary' align='right'>Total</td>
+                      </tr>
+                      " . $this->treePdf2($child->children ?? $child->childrengenerated ?? $child->characteristics ?? '', $child ?? '', $total + 1) . "
+                    </tbody>
+                    <tfoot>
+                      " . (isset($child->characteristics) || isset($child->childrengenerated) || isset($child->children) ? "
+                        <tr class='t1 text-bold'>
+                          <td class='text-primary table-bg' width='45%'><div style='padding-left: 10px;'>Total " . ($child->name ?? $child->title) . "</div></td>
+                          <td colspan='3' align='right' class='text-primary'><div style='padding-right: 10px;'>" . number_format($paidTotal) . " " . ($this->entity->options->currency->label ?? \Currency::getLocaleCurrency()->code) . "</div></td>
+                        </tr>
+                        " : "") . "
+                    </tfoot>
+                  </table>                            
+                ";
+            }
           }
         }
       }

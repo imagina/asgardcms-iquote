@@ -305,18 +305,18 @@
                         @endphp
                     @endif
                 @endforeach
-                @for($j=$i;$j<2;$j++)
-                    <div class="mj-column-per-20">
+                @for($j=$i;$j<1;$j++)
+                    <div class="mj-column-per-33">
                         &nbsp;
                     </div>
                 @endfor
                 {{--<div class="mj-column-per-20">
                     <img src="https:{{ Module::asset('iquote:img/img-footer-2.png') }}" width="100%" height="auto" />
                 </div>--}}
-                <div class="mj-column-per-20">
+                <div class="mj-column-per-33">
                     <div style="word-wrap: break-word;margin: 20px -15px">
-                        {{--<div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">{{ url('') }}</a></div>--}}
-                        <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">https://migrate-au.com</a></div>
+                        <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">{{ url('') }}</a></div>
+                        <!--<div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">https://migrate-au.com</a></div>-->
                         <div class="pagenum"></div>
                     </div>
                 </div>
@@ -331,8 +331,8 @@
                         @endphp
                     @endif
                 @endforeach
-                @for($j=$i;$j<2;$j++)
-                    <div class="mj-column-per-20">
+                @for($j=$i;$j<1;$j++)
+                    <div class="mj-column-per-33">
                         &nbsp;
                     </div>
                 @endfor
@@ -401,14 +401,10 @@
                             <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>{{ trans('iquote::quotes.pdf.phone') }}</strong></div>
                             <div>{{ $quote->phone ?? '--' }}</div>
                         </p>
-                        {{--<p>
-                            <div class="text-primary"><strong><i class="fas fa-id-card-alt"></i>{{ trans('iquote::quotes.pdf.document_id') }}</strong></div>
-                            <div>{{ $quote->options->identification ?? '--' }}</div>
-                        </p>
                         <p>
                             <div class="text-primary"><strong><i class="fas fa-thumbtack"></i>{{ trans('iquote::quotes.pdf.city') }}</strong></div>
-                            <div>{{ $quote->options->city->label  ?? '--' }}</div>
-                        </p>--}}
+                            <div>{{ $quote->options->city ?? '--' }}</div>
+                        </p>
                     </div>
                     <div class="mj-column-per-33">
                         <p>
@@ -419,20 +415,27 @@
                             <div class="text-primary"><strong><i class="fas fa-envelope"></i>{{ trans('iquote::quotes.pdf.email') }}</strong></div>
                             <div>{{ $quote->email ?? '--' }}</div>
                         </p>
-                        {{--<p>
-                            <div class="text-primary"><strong><i class="fas fa-map-marker-alt"></i>{{ trans('iquote::quotes.pdf.state') }}</strong></div>
-                            <div>{{ $quote->options->department->label  ?? '--' }}</div>
-                        <p>--}}
+                        <p>
+                           <div class="text-primary"><strong><i class="fas fa-map-marker-alt"></i>{{ trans('iquote::quotes.pdf.state') }}</strong></div>
+                           <div>{{ $quote->options->department  ?? '--' }}</div>
+                        <p>
                     </div>
                     <div class="mj-column-per-33">
                         <p>
-                        <div class="text-primary"><strong><i class="fas fa-globe-americas"></i>{{ trans('iquote::quotes.pdf.country') }}</strong></div>
-                        <div>{{ $quote->options->country->label ?? '--' }}</div>
+                            <div class="text-primary"><strong><i class="fas fa-id-card-alt"></i>{{ trans('iquote::quotes.pdf.document_id') }}</strong></div>
+                            <div>{{ $quote->options->identification ?? '--' }}</div>
                         </p>
                         <p>
-                        <div class="text-primary"><strong><i class="fas fa-calendar-day"></i>{{ trans('iquote::quotes.pdf.birthday') }}</strong></div>
-                        <div>{{ $quote->options->birthday ?? '--' }}</div>
+                            <div class="text-primary"><strong><i class="fas fa-calendar-day"></i>{{ trans('iquote::quotes.pdf.birthday') }}</strong></div>
+                            <div>{{ $quote->options->birthday ?? '--' }}</div>
                         </p>
+                        <p>
+                            <div class="text-primary"><strong><i class="fas fa-globe-americas"></i>{{ trans('iquote::quotes.pdf.country') }}</strong></div>
+                            <div>{{ $quote->options->country->label ?? '--' }}</div>
+                        </p>
+                    </div>
+                    <div class="mj-column-per-100">&nbsp;</div>
+                    <div class="mj-column-per-33">
                         {{--<div class="text-primary"><strong><i class="fas fa-comment-dots"></i>{{ trans('iquote::quotes.pdf.notes') }}</strong></div>
                         <div>{!! $quote->notes ?? '--' !!}</div>--}}
                     </div>

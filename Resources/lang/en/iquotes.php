@@ -5,7 +5,7 @@ return [
         'iquotes' => 'Quote',
         'total' => 'Grand Total',
         'resume' => 'Quote Resume',
-        'customer_profile' => 'Traveler Data',
+        'customer_profile' => 'Customer Data',
         'consultant_profile' => 'Consultant',
         'quote_profile' => 'Quote Profile',
         'other_prices' => 'Other Prices',
