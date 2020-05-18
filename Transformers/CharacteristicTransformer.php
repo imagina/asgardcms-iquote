@@ -17,6 +17,7 @@ class CharacteristicTransformer extends Resource
       'typeName' => $this->when($this->type, $this->present()->type),
       'parentId' => $this->parent_id ? $this->parent_id : null,
       'price' => Currency::convert($this->price),
+      'discount' => $this->when($this->discount, $this->discount),
       'active' => $this->active ? true : false,
       'name' => $this->when( $this->name, $this->name ),
       'description' => $this->when( $this->description, $this->description ),

@@ -13,6 +13,7 @@ class ProductTransformer extends Resource
       'id' => $this->when($this->id, $this->id),
       'active' => $this->active ? true : false,
       'price' => $this->when($this->price, $this->price),
+      'discount' => $this->when($this->discount, $this->discount),
       'name' => $this->when($this->name, $this->name),
       'isDisabled' => false,
       'checked' => false,
