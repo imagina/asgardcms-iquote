@@ -1,4 +1,4 @@
-# Asgardcms-iquote  v1.0.10
+# Asgardcms-iquote  v1.0.11
 
 
 ## Installation
