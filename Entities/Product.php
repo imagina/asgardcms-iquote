@@ -65,4 +65,8 @@ class Product extends Model
 
   }
 
+  public function getValueWithDiscountAttribute(){
+    return $this->price - $this->discount;
+  }
+
 }
