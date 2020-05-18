@@ -32,7 +32,8 @@ class Characteristic extends Model
     'max',
     'min',
     'with_notes',
-    'searcheable'
+    'searcheable',
+    'discount'
   ];
 
   protected $presenter = CharacteristicPresenter::class;
