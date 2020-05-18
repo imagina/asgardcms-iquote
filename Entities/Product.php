@@ -22,6 +22,7 @@ class Product extends Model
     'active',
     'price',
     'include_in_quotation',
+    'discount'
   ];
 
 
