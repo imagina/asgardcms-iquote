@@ -14,7 +14,7 @@ class AddDiscountFieldToCharacteristicTable extends Migration
     public function up()
     {
         Schema::table('iquote__characteristics', function (Blueprint $table) {
-          $table->float('discount',12,2)->nullable();
+          $table->float('discount',12,2)->default(0)->nullable();
         });
     }
 
