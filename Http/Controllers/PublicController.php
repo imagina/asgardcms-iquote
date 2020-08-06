@@ -35,7 +35,15 @@ class PublicController extends BasePublicController
         if (isset($quote->user->email) && !empty($quote->user->email)) {
           array_push($emails, $quote->user->email);
         }
-        $this->pdf->loadView('iquote::frontend.pdf.quotes',compact('quote'));
+        $views = ['iquote.pdf.quotes','iquote::frontend.pdf.quotes'];
+        $selectedView = '';
+        foreach ($views as $view){
+            if(view()->exists($view)){
+                $selectedView = $view;
+                break;
+            }
+        }
+        $this->pdf->loadView($selectedView,compact('quote'));
         $this->pdf->setPaper('Letter','portrait');
         return $this->pdf->stream();
       } catch (\Exception $e) {
@@ -53,8 +61,16 @@ class PublicController extends BasePublicController
         if (isset($quote->user->email) && !empty($quote->user->email)) {
           array_push($emails, $quote->user->email);
         }
+          $views = ['iquote.pdf.quotes','iquote::frontend.pdf.quotes'];
+          $selectedView = '';
+          foreach ($views as $view){
+              if(view()->exists($view)){
+                  $selectedView = $view;
+                  break;
+              }
+          }
         $quote->options = json_decode(json_encode($quote->options));
-        return view('iquote::frontend.pdf.quotes',compact('quote'));
+        return view($selectedView,compact('quote'));
       } catch (\Exception $e) {
         return redirect()->to('/')
           ->withErrors(["error"=>"Error: ".$e->getMessage()." - Line ".$e->getLine()]);

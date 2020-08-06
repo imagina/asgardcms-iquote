@@ -110,7 +110,8 @@ class QuoteApiController extends BaseApiController
       }
 
       if (isset($data['is_downloading']) && $data['is_downloading']){
-        event(new QuoteIsDownloading(json_decode(json_encode($dataQuote))));
+        //event(new QuoteIsDownloading($quote));
+        event(new QuoteIsSending(json_decode(json_encode($dataQuote))));
         $pdfRoute = "modules/iquote/pdf/quote".str_pad($quote->id,5,"0",STR_PAD_LEFT).".pdf";
         $response["isDownloading"] = route('iquote.pdf',['quote'=>$quote->id]);
       }

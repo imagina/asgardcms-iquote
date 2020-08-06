@@ -297,8 +297,12 @@
                 @endphp
                 @foreach($imgs as $img)
                     @if(setting('iquote::'.$img))
+                        @php
+                            $url = str_replace('https://','http://',url(''));
+                            $imgPath = str_replace([url(''),$url],'', setting('iquote::'.$img));
+                        @endphp
                         <div class="mj-column-per-20">
-                            <img src="{{ setting('iquote::'.$img) }}" width="100%" height="auto" />
+                            <img src="{{ public_path($imgPath) }}" width="100%" height="auto" />
                         </div>
                         @php
                           $i++;
@@ -306,17 +310,17 @@
                     @endif
                 @endforeach
                 @for($j=$i;$j<1;$j++)
-                    <div class="mj-column-per-33">
+                    <div class="mj-column-per-20">
                         &nbsp;
                     </div>
                 @endfor
                 {{--<div class="mj-column-per-20">
                     <img src="https:{{ Module::asset('iquote:img/img-footer-2.png') }}" width="100%" height="auto" />
                 </div>--}}
-                <div class="mj-column-per-33">
+                <div class="mj-column-per-20">
                     <div style="word-wrap: break-word;margin: 20px -15px">
-                        <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">{{ url('') }}</a></div>
-                        <!--<div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">https://migrate-au.com</a></div>-->
+                        <!--<div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">{{ url('') }}</a></div>-->
+                        <div><a href="{{ url('') }}" style="text-decoration: none" class="text-primary">https://migrate-au.com</a></div>
                         <div class="pagenum"></div>
                     </div>
                 </div>
@@ -332,14 +336,18 @@
                     @endif
                 @endforeach
                 @for($j=$i;$j<1;$j++)
-                    <div class="mj-column-per-33">
+                    <div class="mj-column-per-20">
                         &nbsp;
                     </div>
                 @endfor
                 @foreach($imgs as $img)
                     @if(setting('iquote::'.$img))
+                        @php
+                            $url = str_replace('https://','http://',url(''));
+                            $imgPath = str_replace([url(''),$url],'', setting('iquote::'.$img));
+                        @endphp
                         <div class="mj-column-per-20">
-                            <img src="{{ setting('iquote::'.$img) }}" width="100%" height="auto" />
+                            <img src="{{ public_path($imgPath) }}" width="100%" height="auto" />
                         </div>
                     @endif
                 @endforeach
@@ -364,7 +372,11 @@
         <main>
             <div style="width:100%;font-size:14px;text-align:left;padding: 15px" class="page-break">
                 <div class="bg-1">
-                    <img src="{{ setting('iquote::logo-header') }}" />
+                    @php
+                        $url = str_replace('https://','http://',url(''));
+                        $imgPath = str_replace([url(''),$url],'', setting('iquote::logo-header'));
+                    @endphp
+                    <img src="{{ public_path($imgPath) }}" />
                     <div class="text-primary head-text">
                         <strong>
                             <span style="font-size:10px;">{{ setting('core::site-name') }} - {{ trans('iquote::iquotes.title.iquotes') }} #{{ str_pad($quote->id,5,'0',STR_PAD_LEFT) }}</span>
@@ -375,21 +387,6 @@
                     {!! setting('iquote::pdf-header-text') !!}
                 </div>--}}
                 <div class="mj-column-per-100"><h1 class="text-primary" style="text-align: center">{{ trans('iquote::iquotes.title.resume') }}</h1></div>
-                <div class="mj-column-per-100 head-title">{{ trans('iquote::iquotes.title.consultant_profile') }}</div>
-                <div class="mj-column-per-100" style="padding: 10px">
-                    <div class="mj-column-per-66">
-                        <p>
-                        <div class="text-primary"><strong><i class="fas fa-user"></i>{{ trans('iquote::quotes.pdf.first_name') }}</strong></div>
-                        <div>{{ ($quote->user->first_name ?? '--') . ' ' . ($quote->user->last_name ?? '--') }}</div>
-                        </p>
-                    </div>
-                    <div class="mj-column-per-33">
-                        <p>
-                        <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>{{ trans('iquote::quotes.pdf.phone') }}</strong></div>
-                        <div>{{ $quote->user->phone ?? '--' }}</div>
-                        </p>
-                    </div>
-                </div>
                 <div class="mj-column-per-100 head-title border-top-radius">{{ trans('iquote::iquotes.title.customer_profile') }}</div>
                 <div style="border: 1px solid #E5E5E5;border-top: none;padding: 10px" class="border-bottom-radius">
                     <div class="mj-column-per-33">
@@ -401,10 +398,10 @@
                             <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>{{ trans('iquote::quotes.pdf.phone') }}</strong></div>
                             <div>{{ $quote->phone ?? '--' }}</div>
                         </p>
-                        <p>
+                        {{--<p>
                             <div class="text-primary"><strong><i class="fas fa-thumbtack"></i>{{ trans('iquote::quotes.pdf.city') }}</strong></div>
                             <div>{{ $quote->options->city ?? '--' }}</div>
-                        </p>
+                        </p>--}}
                     </div>
                     <div class="mj-column-per-33">
                         <p>
@@ -415,16 +412,16 @@
                             <div class="text-primary"><strong><i class="fas fa-envelope"></i>{{ trans('iquote::quotes.pdf.email') }}</strong></div>
                             <div>{{ $quote->email ?? '--' }}</div>
                         </p>
-                        <p>
+                        {{--<p>
                            <div class="text-primary"><strong><i class="fas fa-map-marker-alt"></i>{{ trans('iquote::quotes.pdf.state') }}</strong></div>
                            <div>{{ $quote->options->department  ?? '--' }}</div>
-                        <p>
+                        <p>--}}
                     </div>
                     <div class="mj-column-per-33">
-                        <p>
+                        {{--<p>
                             <div class="text-primary"><strong><i class="fas fa-id-card-alt"></i>{{ trans('iquote::quotes.pdf.document_id') }}</strong></div>
                             <div>{{ $quote->options->identification ?? '--' }}</div>
-                        </p>
+                        </p>--}}
                         <p>
                             <div class="text-primary"><strong><i class="fas fa-calendar-day"></i>{{ trans('iquote::quotes.pdf.birthday') }}</strong></div>
                             <div>{{ $quote->options->birthday ?? '--' }}</div>
@@ -440,6 +437,23 @@
                         <div>{!! $quote->notes ?? '--' !!}</div>--}}
                     </div>
                 </div>
+                @if($quote->user)
+                    <div class="mj-column-per-100 head-title">{{ trans('iquote::iquotes.title.consultant_profile') }}</div>
+                    <div class="mj-column-per-100" style="padding: 10px">
+                        <div class="mj-column-per-66">
+                            <p>
+                            <div class="text-primary"><strong><i class="fas fa-user"></i>{{ trans('iquote::quotes.pdf.first_name') }}</strong></div>
+                            <div>{{ ($quote->user->first_name ?? '--') . ' ' . ($quote->user->last_name ?? '--') }}</div>
+                            </p>
+                        </div>
+                        <div class="mj-column-per-33">
+                            <p>
+                            <div class="text-primary"><strong><i class="fas fa-mobile-alt"></i>{{ trans('iquote::quotes.pdf.phone') }}</strong></div>
+                            <div>{{ $quote->user->phone ?? '--' }}</div>
+                            </p>
+                        </div>
+                    </div>
+                @endif
                 <div>&nbsp;</div>
                 <div class="mj-column-per-100 head-title" style="text-align: center">{{ trans('iquote::iquotes.title.quote_profile') }}</div>
             </div>
@@ -453,8 +467,10 @@
                         </tr>
                     </tbody>
                 </table>
+                @if($quote->present()->treePdf(false))
                 <div class="mj-column-per-100"><h2 class="text-primary" style="text-align: center">{{ trans('iquote::iquotes.title.other_prices') }}</h2></div>
                 {!! $quote->present()->treePdf(false) !!}
+                @endif
                 <div style="padding-top: 15px">
                     <p><span class="text-primary text-bold">{{ trans('iquote::quotes.pdf.notes') }}</span></p>
                     <p>{!! $quote->notes ?? '--' !!}</p>

@@ -170,7 +170,7 @@ class QuotePresenter extends Presenter
     if (!empty($children)){
       foreach ($children as $child) {
         if(!empty($selected)) {
-          if ($child->type === Type::OPTION) {
+          if ($child->type === Type::OPTION && isset($selected->model->value)) {
             if ($selected->model->value == $child->id) {
               $total += $selected->model->price;
               $total += $this->calculateTotal($child->children ?? $child->childrengenerated ?? $child->characteristics ?? '', $child ?? '');

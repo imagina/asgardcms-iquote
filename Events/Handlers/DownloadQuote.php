@@ -18,9 +18,9 @@ class DownloadQuote
   public function handle(QuoteIsDownloading $event)
   {
     $quote = $event->entity;
-    if (isset($quote->user->email) && !empty($quote->user->email)) {
+    /*if (isset($quote->user->email) && !empty($quote->user->email)) {
       array_push($emails, $quote->user->email);
-    }
+    }*/
     //$user = Auth::user();
 
     $this->pdf->loadView('iquote::frontend.pdf.quotes',compact('quote'));

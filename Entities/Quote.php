@@ -30,6 +30,8 @@ class Quote extends Model
   protected $casts = [
     'value' => 'array',
     'options' => 'object',
+    'created_at' => 'datetime',
+    'updated_at' => 'datetime',
   ];
 
   public function user()
