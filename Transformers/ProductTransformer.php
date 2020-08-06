@@ -4,6 +4,7 @@
 namespace Modules\Iquote\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
+use Modules\Icurrency\Facades\Currency;
 
 class ProductTransformer extends Resource
 {
@@ -12,7 +13,9 @@ class ProductTransformer extends Resource
     $data = [
       'id' => $this->when($this->id, $this->id),
       'active' => $this->active ? true : false,
-      'price' => $this->when($this->price, $this->price),
+      'price' => Currency::convert($this->price),
+      'discount' => Currency::convert($this->discount),
+      'valueWithDiscount' => Currency::convert($this->valueWithDiscount),
       'name' => $this->when($this->name, $this->name),
       'isDisabled' => false,
       'checked' => false,

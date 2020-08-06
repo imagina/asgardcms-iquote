@@ -1,6 +1,5 @@
-# Asgardcms-iquote  v1.0.9
+# Asgardcms-iquote  v1.0.11
 
-_Nota: Frontend version compatible [qquote 1.0.8](https://github.com/imagina/qquote/tree/1.0.8)_
 
 ## Installation
 First, we require the installation of *laravel-dompdf* library (https://github.com/barryvdh/laravel-dompdf):

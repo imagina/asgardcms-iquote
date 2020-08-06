@@ -22,6 +22,7 @@ class Product extends Model
     'active',
     'price',
     'include_in_quotation',
+    'discount'
   ];
 
 
@@ -62,6 +63,10 @@ class Product extends Model
     }
     return json_decode(json_encode($image));
 
+  }
+
+  public function getValueWithDiscountAttribute(){
+    return $this->price - $this->discount;
   }
 
 }

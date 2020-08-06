@@ -32,7 +32,8 @@ class Characteristic extends Model
     'max',
     'min',
     'with_notes',
-    'searcheable'
+    'searcheable',
+    'discount'
   ];
 
   protected $presenter = CharacteristicPresenter::class;
@@ -80,6 +81,10 @@ class Characteristic extends Model
     }
     return json_decode(json_encode($image));
 
+  }
+
+  public function getValueWithDiscountAttribute(){
+    return $this->price - $this->discount;
   }
 
 }
